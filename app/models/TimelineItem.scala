@@ -72,7 +72,7 @@ object TimelineItem {
                           .leftJoin(Assignments).on(_._1.itemid === _.itemid)
                           .leftJoin(Lectures).on(_._1._1.itemid === _.itemid)
                           .map(x=>(x._1._1._1,x._1._1._2.?,x._1._2.?,x._2.?))
-  def apply(classId:Int,drop:Int=0,take:Int=999999)={
+  def apply(classId:Int,drop:Int=0,take:Int=999999)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
     allTimeline.filter(_._1.classid === classId).drop(drop).take(take)
       .list.map{
       case (t,Some(item),None,None)=>

@@ -41,7 +41,7 @@ object Classes {
   }
   
   private lazy val classJoin = tQuery leftJoin Users.tQuery on (_.professorid === _.userid) leftJoin Schools on (_._1.schoolid === _.schoolid)
-  def apply(classid:Int)={
+  def apply(classid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
     val row = classJoin.filter(_._1._1.classid === classid).firstOption
     row map {row=>
       val cls = row._1._1

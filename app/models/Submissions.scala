@@ -64,7 +64,7 @@ object Submissions {
       }
   }
   
-  def apply(assignmentId:Int, userId:Int)={
+  def apply(assignmentId:Int, userId:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
     tQuery.filter(x=>x.assignmentid === assignmentId && x.userid === userId)
           .list.map(new Submission(_))
   }

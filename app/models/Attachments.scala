@@ -29,7 +29,7 @@ object Attachments {
   }
   
   
-  private[models] def apply(attachable: Attachable):Seq[Attachment]={
+  private[models] def apply(attachable: Attachable)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef):Seq[Attachment]={
     (attachable.attachQuery innerJoin tQuery on ((x,y)=> x._1 === y.attachmentid && x._2 === y.owner))
       .map(_._2)
       .list
@@ -40,5 +40,5 @@ object Attachments {
 }
 
 trait Attachable{
-  val attachQuery:Query[(Column[String],Column[Int]),(String,Int)]
+  val attachQuery:Query[Column[String],Column[Int],(String,Int)]
 }

@@ -42,14 +42,14 @@ object Users {
   
   private case class UserJoin(user:Users, prof:Professors, stu:Students, work:Schools, major:Majors, school:Schools)
 
-  def apply(email:String, password:String)={
+  def apply(email:String, password:String)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
     val encryptedPassword = encrypt(password)
     
     val userRow = tQuery.filter(_.email === email).filter(_.passwd === encryptedPassword).firstOption
     userRow map getUsers
   }
 
-  private[models] def apply(userid:Int)={
+  private[models] def apply(userid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
     val userRow = tQuery.filter(_.userid === userid).firstOption
     userRow map getUsers
   }
