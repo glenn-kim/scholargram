@@ -29,7 +29,7 @@ lazy val slickCodeGenTask = (sourceManaged, dependencyClasspath in Compile, runn
     FilesInfo.exists)({(inFiles: Set[File])=>
     inFiles.flatMap { sqlPath =>
       val outputDir = (dir / "main").getPath // place generated files in sbt's managed sources folder
-      val url = "jdbc:h2:mem:scholargram;INIT=runscript from '%s'".format(sqlPath) // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every run
+      val url = "jdbc:h2:mem:scholargram;DATABASE_TO_UPPER=FALSE;INIT=runscript from '%s'".format(sqlPath) // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every run
       val jdbcDriver = "org.h2.Driver"
       val slickDriver = "scala.slick.driver.H2Driver"
       val pkg = "models"

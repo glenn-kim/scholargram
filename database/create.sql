@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS ClassRegistrations (
   classId INT NOT NULL,
   identity VARCHAR(40) NOT NULL,
   major VARCHAR(40) NOT NULL,
+  joinedDatetime DATETIME NOT NULL,
   accepted INT NOT NULL,
   PRIMARY KEY (userId, classId),
   CONSTRAINT fk_Students_has_Classes_Students1
@@ -230,7 +231,7 @@ ENGINE = InnoDB;
 -- Table Attachments
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Attachments (
-  attachmentId INT NOT NULL AUTO_INCREMENT,
+  attachmentId CHAR(128) NOT NULL AUTO_INCREMENT,
   owner INT NOT NULL,
   directory VARCHAR(250) NOT NULL,
   filename VARCHAR(250) NOT NULL,
@@ -248,7 +249,7 @@ CREATE INDEX fk_Attachments_Users1_idx ON Attachments(owner ASC);
 -- Table AssignmentAttachments
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS AssignmentAttachments (
-  attachmentId INT NOT NULL,
+  attachmentId CHAR(128) NOT NULL,
   owner INT NOT NULL,
   itemId INT NOT NULL,
   PRIMARY KEY (attachmentId, owner),
@@ -298,7 +299,7 @@ CREATE INDEX fk_Submissions_Students1_idx ON Submissions(userId ASC);
 -- Table SubmissionAttachments
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS SubmissionAttachments (
-  attachmentId INT NOT NULL,
+  attachmentId CHAR(128) NOT NULL,
   owner INT NOT NULL,
   submissionId INT NOT NULL,
   PRIMARY KEY (attachmentId, owner),
@@ -320,7 +321,7 @@ CREATE INDEX fk_SubmissionAttachments_Submissions1_idx ON SubmissionAttachments(
 -- Table LectureAttachments
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS LectureAttachments (
-  attachmentId INT NOT NULL,
+  attachmentId CHAR(128) NOT NULL,
   owner INT NOT NULL,
   itemId INT NOT NULL,
   PRIMARY KEY (attachmentId, owner),
