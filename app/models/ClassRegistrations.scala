@@ -27,7 +27,7 @@ object ClassRegistrations {
   }
   
   implicit lazy val classRegistrationWrites = new Writes[ClassRegistration]{
-    import Users.userwrites
+    import Users.userWrites
     override def writes(reg: ClassRegistration): JsValue = Json.obj(
       "student" -> Json.toJson(reg.student),
       "joined" -> reg.joined,

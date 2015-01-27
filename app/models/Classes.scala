@@ -29,7 +29,7 @@ object Classes {
   }
   
   implicit val classWrites = new Writes[Class] {
-    import models.Users.userwrites
+    import models.Users.userWrites
     override def writes(cls: Class): JsValue = Json.obj(
       "id" -> cls.id,
       "professor" -> Json.toJson(cls.professor),

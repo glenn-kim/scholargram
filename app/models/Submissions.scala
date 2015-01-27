@@ -5,6 +5,8 @@ import java.sql.Timestamp
 import models.Attachments._
 import models.ScholargramTables._
 import models.Users.User
+import models.Users.userWrites
+import models.Attachments.attachmentWrites
 import play.api.db.slick.Config.driver.profile.simple._
 import play.api.libs.json.{Json, JsValue, Writes}
 
@@ -24,7 +26,6 @@ object Submissions {
   case class StudentSubmission(student:User, last_updated:Timestamp, first_upload:Timestamp, last_submission:Submission)
 
   implicit val submissionWrites = new Writes[Submission]{
-    import models.Attachments.attachmentWrites
     override def writes(submission: Submission): JsValue = Json.obj(
       "create_datetime"->submission.create_datetime,
       "descripttion"->submission.description,
@@ -33,7 +34,6 @@ object Submissions {
   }
 
   implicit val studentSubmissionWrites = new Writes[StudentSubmission]{
-    import  models.Users.userwrites
     override def writes(userSubmission: StudentSubmission): JsValue = Json.obj(
       "student"->Json.toJson(userSubmission.student),
       "last_updated"->userSubmission.last_updated,
@@ -41,7 +41,6 @@ object Submissions {
       "last_submission"->userSubmission.last_submission
     )
   }
-  
 
   private def SubmissionAttachable(submissionId:Int):Attachable=new Attachable{
     override val attachQuery =

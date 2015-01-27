@@ -1,17 +1,12 @@
 package models
 
-import java.sql.{Date, Timestamp}
+import java.sql.Timestamp
 
-import models.Users.{User, Professor}
-import net.sf.ehcache.constructs.nonstop.store.ExceptionOnTimeoutStore
-import play.api.libs.json.{JsObject, Json, JsValue, Writes}
-import play.api.db.slick.Config.driver.profile.simple._
-import ScholargramTables._
-import models.Attachments.attachmentWrites
-
-import scala.slick.lifted
-import models.Attachments._
 import exception.InvalidDataIntegraityException
+import models.Attachments._
+import models.ScholargramTables._
+import play.api.db.slick.Config.driver.profile.simple._
+import play.api.libs.json.{JsObject, JsValue, Json, Writes}
 
 
 /**

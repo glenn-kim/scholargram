@@ -1,6 +1,8 @@
 package models
 
-import play.api.libs.json.{JsObject, JsValue, Json, Writes}
+import play.api.libs.json._
+import play.api.libs.json.Reads._
+import play.api.libs.functional.syntax._
 import ScholargramTables._
 import play.api.db.slick.Config.driver.profile.simple._
 import models.School._
@@ -30,7 +32,7 @@ object Users {
     ) 
   }
 
-  implicit val userwrites = new Writes[User] {
+  implicit val userWrites = new Writes[User] {
     override def writes(user: User): JsValue = Json.obj(
       "id" -> user.id,
       "name" -> user.name,
@@ -38,6 +40,17 @@ object Users {
       "user_detail" -> user.userDetail
     )
   }
+  implicit val userReads:Reads[User]=(
+      (JsPath \ "id").read[Int] and
+      (JsPath \ "name").read[String] and
+      (JsPath \ "user_type").read[String] and
+      (JsPath \ "user_detail").read[JsObject]
+    
+    ){(id,name,usertype,detail)=>
+        val nUser:User = new User(id,name,usertype) {
+            override val userDetail: JsObject = detail
+          }
+        nUser}
   
   private case class UserJoin(user:Users, prof:Professors, stu:Students, work:Schools, major:Majors, school:Schools)
 
