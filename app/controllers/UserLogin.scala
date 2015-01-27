@@ -1,7 +1,7 @@
 package controllers
 
 import models.Users
-import models.Users.userwrites
+import models.Users.{User, userWrites}
 import play.api.db.slick.DBAction
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Reads._
@@ -14,8 +14,9 @@ import play.api.mvc._
  */
 object UserLogin extends Controller{
   
-  val badreq = BadRequest("not allow type")
+  val invalidatedForm = BadRequest("not allow type")
   val forbidden = Forbidden("no such user or password missmatch")
+  val loginNessesery = Forbidden("login Nessesary")
   val LOGINED = "logined"
   
   case class LoginForm(email:String, password:String)
@@ -31,11 +32,33 @@ object UserLogin extends Controller{
         Users(form.get.email,form.get.password)(req.dbSession)
         .map{loginData=>
           Ok(Json.toJson(loginData))
-            .withSession(LOGINED->loginData.id.toString)
+            .withSession(LOGINED->Json.toJson(loginData).toString)
         }.getOrElse(forbidden)
       case _=>
-        badreq
-    }.getOrElse(badreq)
+        invalidatedForm
+    }.getOrElse(invalidatedForm)
   }
+
+  def logout() = Action { req =>
+    Ok("successfully").withNewSession
+  }
+  
+  def me() = Action{req=>
+    loginedMe(req).map(u=>Ok(Json.toJson(u))).getOrElse(loginNessesery)
+  }
+
+
+  def loginedMe(req:Request[AnyContent]):Option[User] = {
+    req.session.get(LOGINED)
+      .map(Json.parse)
+      .map(_.validate[User])
+      .flatMap{
+      case user:JsSuccess[User]=>
+        Some(user.get)
+      case _=>
+        None
+      }
+  }
+  
   
 }
