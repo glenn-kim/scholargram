@@ -102,3 +102,11 @@ server.pid
 *.eml
 /dist/
 .cache
+
+
+# OS X
+.DS_Store
+
+# VIM
+*.swp
+

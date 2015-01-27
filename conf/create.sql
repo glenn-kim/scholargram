@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS Professors (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_Professors_Schools_idx ON Professors(work ASC);
+CREATE INDEX IF NOT EXISTS fk_Professors_Schools_idx ON Professors(work ASC);
 
 
 -- -----------------------------------------------------
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Majors (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_Majors_Schools1_idx ON Majors(schoolId ASC);
+CREATE INDEX IF NOT EXISTS fk_Majors_Schools1_idx ON Majors(schoolId ASC);
 
 -- -----------------------------------------------------
 -- Table Students
@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS Students (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX k_Students_Users2_idx ON Students(userId ASC);
-CREATE INDEX fk_Students_Majors1_idx ON Students(majorId ASC);
+CREATE INDEX IF NOT EXISTS k_Students_Users2_idx ON Students(userId ASC);
+CREATE INDEX IF NOT EXISTS fk_Students_Majors1_idx ON Students(majorId ASC);
 
 -- -----------------------------------------------------
 -- Table Classes
@@ -119,8 +119,8 @@ CREATE TABLE IF NOT EXISTS Classes (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_Classes_Professors1_idx ON Classes(professorId ASC);
-CREATE INDEX fk_Classes_Schools1_idx ON Classes(schoolId ASC);
+CREATE INDEX IF NOT EXISTS fk_Classes_Professors1_idx ON Classes(professorId ASC);
+CREATE INDEX IF NOT EXISTS fk_Classes_Schools1_idx ON Classes(schoolId ASC);
 
 -- -----------------------------------------------------
 -- Table TimelineItems
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS TimelineItems (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_TimelineItems_Classes1_idx ON TimelineItems(classId ASC);
+CREATE INDEX IF NOT EXISTS fk_TimelineItems_Classes1_idx ON TimelineItems(classId ASC);
 
 -- -----------------------------------------------------
 -- Table ClassRegistration
@@ -163,8 +163,8 @@ CREATE TABLE IF NOT EXISTS ClassRegistrations (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_Students_has_Classes_Students1_idx ON ClassRegistrations(userId ASC);
-CREATE INDEX fk_Students_has_Classes_Classes1_idx ON ClassRegistrations(classId ASC);
+CREATE INDEX IF NOT EXISTS fk_Students_has_Classes_Students1_idx ON ClassRegistrations(userId ASC);
+CREATE INDEX IF NOT EXISTS fk_Students_has_Classes_Classes1_idx ON ClassRegistrations(classId ASC);
 
 -- -----------------------------------------------------
 -- Table Alerts
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS Attachments (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_Attachments_Users1_idx ON Attachments(owner ASC);
+CREATE INDEX IF NOT EXISTS fk_Attachments_Users1_idx ON Attachments(owner ASC);
 
 -- -----------------------------------------------------
 -- Table AssignmentAttachments
@@ -265,8 +265,8 @@ CREATE TABLE IF NOT EXISTS AssignmentAttachments (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_AssignmentAttachments_Attachments1_idx ON AssignmentAttachments(attachmentId ASC, owner ASC);
-CREATE INDEX fk_AssignmentAttachments_Assignments1_idx ON AssignmentAttachments(itemId ASC);
+CREATE INDEX IF NOT EXISTS fk_AssignmentAttachments_Attachments1_idx ON AssignmentAttachments(attachmentId ASC, owner ASC);
+CREATE INDEX IF NOT EXISTS fk_AssignmentAttachments_Assignments1_idx ON AssignmentAttachments(itemId ASC);
 
 
 -- -----------------------------------------------------
@@ -292,8 +292,8 @@ CREATE TABLE IF NOT EXISTS Submissions (
 ENGINE = InnoDB;
 
 
-CREATE INDEX fk_Submissions_Assignments1_idx ON Submissions(assignmentId ASC);
-CREATE INDEX fk_Submissions_Students1_idx ON Submissions(userId ASC);
+CREATE INDEX IF NOT EXISTS fk_Submissions_Assignments1_idx ON Submissions(assignmentId ASC);
+CREATE INDEX IF NOT EXISTS fk_Submissions_Students1_idx ON Submissions(userId ASC);
 
 -- -----------------------------------------------------
 -- Table SubmissionAttachments
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS SubmissionAttachments (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_SubmissionAttachments_Submissions1_idx ON SubmissionAttachments(submissionId ASC);
+CREATE INDEX IF NOT EXISTS fk_SubmissionAttachments_Submissions1_idx ON SubmissionAttachments(submissionId ASC);
 
 -- -----------------------------------------------------
 -- Table LectureAttachments
@@ -337,4 +337,4 @@ CREATE TABLE IF NOT EXISTS LectureAttachments (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX fk_LectureAttachments_Lectures1_idx ON LectureAttachments(itemId ASC);
+CREATE INDEX IF NOT EXISTS fk_LectureAttachments_Lectures1_idx ON LectureAttachments(itemId ASC);

@@ -3,12 +3,15 @@ package models
 import java.sql.{Date, Timestamp}
 
 import models.Users.{User, Professor}
+import net.sf.ehcache.constructs.nonstop.store.ExceptionOnTimeoutStore
 import play.api.libs.json.{JsObject, Json, JsValue, Writes}
 import play.api.db.slick.Config.driver.profile.simple._
 import ScholargramTables._
-import models.Attachments._
+import models.Attachments.attachmentWrites
 
 import scala.slick.lifted
+import models.Attachments._
+import exception.InvalidDataIntegraityException
 
 
 /**
@@ -24,13 +27,13 @@ object TimelineItem {
     val data:JsObject 
   }
   
-  case class Alert(override val id:Int, override val publish:Timestamp, text:String) extends TimelineItem(id,"alert",publish){
+  class Alert(override val id:Int, override val publish:Timestamp, text:String) extends TimelineItem(id,"alert",publish){
     override lazy val data: JsObject = Json.obj(
       "text"->text
     )
   }
 
-  case class Assignment(override val id:Int, override val publish:Timestamp,
+  class Assignment(override val id:Int, override val publish:Timestamp,
                         title:String, text:String, due_datetime:Timestamp, attachments:Seq[Attachment])
                         extends TimelineItem(id,"assignment",publish){
     override lazy val data: JsObject = Json.obj(
@@ -41,7 +44,7 @@ object TimelineItem {
     )
   }
 
-  case class Lecture(override val id:Int, override val publish:Timestamp,
+  class Lecture(override val id:Int, override val publish:Timestamp,
                      title:String, attachments:Seq[Attachment]) extends TimelineItem(id,"lecture",publish){
     override lazy val data: JsObject = Json.obj(
       "title"->title,
@@ -72,16 +75,20 @@ object TimelineItem {
                           .leftJoin(Assignments).on(_._1.itemid === _.itemid)
                           .leftJoin(Lectures).on(_._1._1.itemid === _.itemid)
                           .map(x=>(x._1._1._1,x._1._1._2.?,x._1._2.?,x._2.?))
-  def apply(classId:Int,drop:Int=0,take:Int=999999)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
+  def apply(classId:Int,drop:Int=0,take:Int=999999)(implicit session : Session)={
     allTimeline.filter(_._1.classid === classId).drop(drop).take(take)
       .list.map{
-      case (t,Some(item),None,None)=>
-        Alert(t.itemid, t.publishdatetime, item.text)
-      case (t,None,Some(item),None)=>
-        Assignment(t.itemid,t.publishdatetime,item.title,item.description,item.duedatetime, Attachments(AssignmentAttachable(item.itemid)))
-      case (t,None,None,Some(item))=>
-        Lecture(t.itemid, t.publishdatetime, item.title, Attachments(LectureAttachable(item.itemid)))
+        case (t,Some(item),None,None)=>
+          new Alert(t.itemid, t.publishdatetime, item.text)
+        case (t,None,Some(item),None)=>
+          new Assignment(t.itemid,t.publishdatetime,item.title,item.description,item.duedatetime, Attachments(AssignmentAttachable(item.itemid)))
+        case (t,None,None,Some(item))=>
+          new Lecture(t.itemid, t.publishdatetime, item.title, Attachments(LectureAttachable(item.itemid)))
+        case _=>
+          throw new InvalidDataIntegraityException("timeline should have just one type")
     }
   }
+  
+
   
 }
