@@ -36,7 +36,7 @@ object ClassRegistrations {
       "accepted" -> reg.accepted
     )
   }
-  def apply(user:User, classid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
+  def apply(user:User, classid:Int)(implicit session : Session)={
     val row = tQuery.filter(_.classid === classid).filter(_.userid === user.id).firstOption
     row map (new ClassRegistration(user,_))
   }

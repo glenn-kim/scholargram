@@ -19,7 +19,7 @@ libraryDependencies ++= Seq( jdbc , anorm , cache , ws,
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
-val dbCreate = "database/create.sql"
+val dbCreate = "conf/create.sql"
 
 // code generation task
 lazy val slick = TaskKey[Seq[File]]("gen-tables")

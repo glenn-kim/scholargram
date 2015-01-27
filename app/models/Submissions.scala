@@ -2,11 +2,12 @@ package models
 
 import java.sql.Timestamp
 
-import models.Attachments.Attachment
+import models.Attachments._
 import models.ScholargramTables._
 import models.Users.User
 import play.api.db.slick.Config.driver.profile.simple._
 import play.api.libs.json.{Json, JsValue, Writes}
+
 
 /**
  * Created by infinitu on 15. 1. 23..
@@ -16,7 +17,7 @@ object Submissions {
   val tQuery = models.ScholargramTables.Submissions
   
   case class Submission(create_datetime:Timestamp, description: String, attachments:Seq[Attachment]){
-    def this(row:SubmissionsRow) =
+    def this(row:SubmissionsRow)(implicit session : Session) =
       this(row.createdatetime,row.description, Attachments(SubmissionAttachable(row.submissionid)))
   }
   
@@ -55,7 +56,7 @@ object Submissions {
   
   
   
-  def apply(assignmentId:Int)={
+  def apply(assignmentId:Int)(implicit session : Session)={
     lastestSubmissionQuery
       .filter{_._1.assignmentid === assignmentId}
       .list
@@ -64,7 +65,7 @@ object Submissions {
       }
   }
   
-  def apply(assignmentId:Int, userId:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
+  def apply(assignmentId:Int, userId:Int)(implicit session : Session)={
     tQuery.filter(x=>x.assignmentid === assignmentId && x.userid === userId)
           .list.map(new Submission(_))
   }

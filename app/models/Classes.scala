@@ -21,10 +21,10 @@ object Classes {
                     ending_date:Option[Date],
                     created_datetime:Timestamp,
                     school:School){
-    def this(row: ClassesRow, professor:User, school:SchoolsRow)
+    def this(row: ClassesRow, professor:User, school:SchoolsRow)(implicit session : Session)
       =this(row.classid,row.classname,professor,row.startdate,row.enddate,row.createdatetime,new School(school))
     
-    def this(row:ClassesRow, professor:UsersRow, school:SchoolsRow)
+    def this(row:ClassesRow, professor:UsersRow, school:SchoolsRow)(implicit session : Session)
       =this(row,models.Users.getProfessor(professor).get,school)
   }
   
@@ -41,7 +41,7 @@ object Classes {
   }
   
   private lazy val classJoin = tQuery leftJoin Users.tQuery on (_.professorid === _.userid) leftJoin Schools on (_._1.schoolid === _.schoolid)
-  def apply(classid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
+  def apply(classid:Int)(implicit session : Session)={
     val row = classJoin.filter(_._1._1.classid === classid).firstOption
     row map {row=>
       val cls = row._1._1
