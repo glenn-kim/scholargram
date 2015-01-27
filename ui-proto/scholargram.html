@@ -4,6 +4,8 @@
 
 
 <head>
+	<base href="/~min/scholargram/">
+	
 	<!-- META -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,11 +16,11 @@
 	<title>Scholargram</title>
 	
 	<!-- Customized bootstrap(only with glyphicons) -->
-	<link href="./css/bootstrap-glyphicon.css" rel="stylesheet">
+	<link href="css/bootstrap-glyphicon.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
-	<link href="./css/scholargram.css?prevent-cache" rel="stylesheet">
-	<link href="./css/include/sg-header.css?prevent-cache" rel="stylesheet">
+	<link href="css/scholargram.css?prevent-cache" rel="stylesheet">
+	<link href="css/include/sg-header.css?prevent-cache" rel="stylesheet">
 </head>
 
 
@@ -29,7 +31,13 @@
 
 <!-- Main contents -->
 <div class="container">
-	<h1>{{ UserCtrl.getUser() }}</h1>
+	<aside class="profile">
+		<p>{{ UserCtrl.user.name }}</p>
+		<p>{{ UserCtrl.user.email }}</p>
+		<p><strong>{{ UserCtrl.user.school }}</strong> {{ UserCtrl.user.major }}</p>
+		<p>{{ UserCtrl.user.identity }}</p>
+	</aside>
+
 	<h1>hoho</h1>
 	<h1>hoho</h1>
 	<h1>hoho</h1>
@@ -58,7 +66,7 @@
 <!-- AngularJS -->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 <!-- Custom JS -->
-<script src="./js/app-scholargram.js?prevent-cache"></script>
+<script src="js/app-scholargram.js?prevent-cache"></script>
 
 
 </body>
