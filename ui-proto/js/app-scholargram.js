@@ -30,12 +30,15 @@
 		*/
 		
 		var self = this;
+		
+		self.curUser;
 
-		// public
+		// LOGIN
 		self.authenticate = function(email, passwd) {
 			$http.get("json/user.json").
 				success(function(oUser) {
-					self.user = oUser;
+					self.curUser = oUser;
+					// TODO: After login
 				});
 		};
 		
