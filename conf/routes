@@ -10,9 +10,10 @@ GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
 #UserLogin
 #GET     /login             todo UI
-POST        /login               controllers.UserLogin.login()
-POST        /logout              controllers.UserLogin.logout()
-GET         /me                  controllers.UserLogin.me()
+GET         /login               controllers.UserLogin.loginUI
+POST        /login               controllers.UserLogin.login
+POST        /logout              controllers.UserLogin.logout
+GET         /me                  controllers.UserLogin.me
 #
 #GET     /                                           controllers.Application.todo
 #GET     /dashboard                                  controllers.Application.todo

@@ -26,7 +26,7 @@ object UserLogin extends Controller{
       (JsPath \ "password").read[String]
     )(LoginForm.apply _)
 
-  def login() = DBAction{implicit req=>
+  val login = DBAction{implicit req=>
     req.body.asJson.map(_.validate[LoginForm]).map{
       case form:JsSuccess[LoginForm]=>
         Users(form.get.email,form.get.password)(req.dbSession)
@@ -39,13 +39,15 @@ object UserLogin extends Controller{
     }.getOrElse(invalidatedForm)
   }
 
-  def logout() = Action { req =>
+  val logout = Action { req =>
     Ok("successfully").withNewSession
   }
   
-  def me() = Action{req=>
+  val me = Action{req=>
     loginedMe(req).map(u=>Ok(Json.toJson(u))).getOrElse(loginNessesery)
   }
+  
+  val loginUI = TODO
 
 
   def loginedMe(req:Request[AnyContent]):Option[User] = {
