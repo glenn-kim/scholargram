@@ -3,6 +3,7 @@ package models
 
 import java.sql.{Date, Timestamp}
 
+import exception.InvalidDataIntegraityException
 import models.Users.{User, Professor}
 import play.api.libs.json.{Json, JsValue, Writes}
 import play.api.db.slick.Config.driver.profile.simple._
@@ -40,6 +41,14 @@ object ClassRegistrations {
     val row = tQuery.filter(_.classid === classid).filter(_.userid === user.id).firstOption
     row map (new ClassRegistration(user,_))
   }
-  
+
+  private lazy val registeredStudents = (tQuery innerJoin ScholargramTables.Classes on (_.classid === _.classid)
+                                                innerJoin Users.userDetailQuery on (_._1.userid === _._1.userid))
+  def apply(profId:Int, classId:Int)(implicit session : Session) =
+    registeredStudents
+      .filter(_._1._2.professorid === profId)
+      .filter(_._1._1.classid === classId)
+      .list
+      .map(x=>new ClassRegistration(Users.getUsers(x._2),x._1._1))
 }
 

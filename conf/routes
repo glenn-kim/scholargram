@@ -3,47 +3,63 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index
+GET           /                                            controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET           /assets/*file                                controllers.Assets.at(path="/public", file)
 
 #UserLogin
-#GET     /login             todo UI
-GET         /login               controllers.UserLogin.loginUI
-POST        /login               controllers.UserLogin.login
-POST        /logout              controllers.UserLogin.logout
-GET         /me                  controllers.UserLogin.me
+GET           /login                                       controllers.UserLogin.loginUI
+POST          /login                                       controllers.UserLogin.login
+POST          /logout                                      controllers.UserLogin.logout
+GET           /me                                          controllers.UserLogin.me
+
+#Class
+GET           /classes                                     controllers.ClassController.classList
+#GET           /:classid                                    controllers.ClassController.TODO
+GET           /:classid/students                           controllers.ClassController.registeredList(classid:Int)
+#POST          /:classId/registration                       controllers.ClassController.TODO
+#GET           /:classId/registration                       controllers.ClassController.TODO
 #
-#GET     /                                           controllers.Application.todo
-#GET     /dashboard                                  controllers.Application.todo
-#GET     /classes                                    controllers.Application.todo
-#GET     /:classid                                   controllers.Application.todo
-#GET     /:classid/students                          controllers.Application.todo
-#POST    /:classid/registration                      controllers.Application.todo
-#GET     /:classid/registration                      controllers.Application.todo
-#GET     /:classid/timeline                          controllers.Application.todo
-#POST    /:classid/assignments                       controllers.Application.todo
-#GET     /:classid/assignments                       controllers.Application.todo
-#GET     /:classid/:AssignmentId                     controllers.Application.todo
-#DELETE  /:classid/:AssignmentId                     controllers.Application.todo
-#POST    /:classid/:AssignmentId                     controllers.Application.todo
-#GET     /:classid/:AssignmentId/submissions         controllers.Application.todo
-#POST    /:classid/:AssignmentId/submissions         controllers.Application.todo
-#GET     /:classid/:AssignmentId/{submissionId}      controllers.Application.todo
-#DELETE  /:classid/:AssignmentId/{submissionId}      controllers.Application.todo
-#POST    /:classid/alerts                            controllers.Application.todo
-#GET     /:classid/:alertId                          controllers.Application.todo
-#POST    /:classid/lectures                          controllers.Application.todo
-#GET     /:classid/:alertId                          controllers.Application.todo
-#GET     /:classid/qna                               controllers.Application.todo
-#GET     /:classid/qna/:questionId                   controllers.Application.todo
-#POST    /:classid/qna/:questionId                   controllers.Application.todo
-#DELETE  /:classid/qna/:questionId                   controllers.Application.todo
-#GET     /:classid/chat                              controllers.Application.todo
-#GET     /:classid/chat                              controllers.Application.todo
-#POST    /:classid/chat                              controllers.Application.todo
-#DELETE  /:classid/chat/:CommentId                   controllers.Application.todo
-#POST    /:classid/chat/:CommentId                   controllers.Application.todo
-#GET     /notifications                              controllers.Application.todo
-#DELETE  /notifications/:notiId                      controllers.Application.todo
+#
+##Pages in Class
+#GET           /:classId/timeline                           controllers.Application.TODO
+#GET           /:classId/submissions                        controllers.Application.TODO
+#GET           /:classId/qna                                controllers.Application.TODO
+#
+##QNA
+#POST          /:classId/qna                                controllers.Application.TODO
+#GET           /:classId/qna/:questionId                    controllers.Application.TODO
+#POST          /:classId/qna/:questionId                    controllers.Application.TODO
+#DELETE        /:classId/qna/:questionId                    controllers.Application.TODO
+#
+##Timeline
+##post timeline item
+#POST          /:classId/assignments                        controllers.Application.TODO
+#POST          /{classId}/alerts                            controllers.Application.TODO
+#POST          /{classId}/lectures                          controllers.Application.TODO
+#
+#
+##item get/delete/update
+#GET           /:classId/:itemId                            controllers.Application.TODO
+#DELETE        /:classId/:itemId                            controllers.Application.TODO
+#POST          /:classId/:itemId                            controllers.Application.TODO
+#
+#
+##Submission
+##submission managements
+#GET           /:classId/:assignmentId/submissions          controllers.Application.TODO
+#POST          /:classId/:assignmentId/submissions          controllers.Application.TODO
+#GET           /:classId/:assignmentId/:submissionId        controllers.Application.TODO
+#DELETE        /:classId/:assignmentId/:submissionId        controllers.Application.TODO
+#
+#
+#
+##not yet...
+#GET           /{classId}/chat                              controllers.Application.TODO
+#GET           /{classId}/chat                              controllers.Application.TODO
+#POST          /{classId}/chat                              controllers.Application.TODO
+#DELETE        /{classId}/chat/{CommentId}                  controllers.Application.TODO
+#POST          /{classId}/chat/{CommentId}                  controllers.Application.TODO
+#GET           /notifications                               controllers.Application.TODO
+#DELETE        /notifications/{nofiId}                      controllers.Application.TODO
