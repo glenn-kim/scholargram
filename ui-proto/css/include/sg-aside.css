@@ -1,10 +1,16 @@
 aside {
+	display: table-cell;
 	vertical-align: top;
 }
 
 aside .profile {
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+aside .profile img {
+	width: 100%;
+	height: auto;
 }
 
 .profile-text {
@@ -17,6 +23,7 @@ aside nav {
 }
 
 aside nav > .btn {
+	width: 150px;
 	margin-bottom: 10px;
 }
 
@@ -38,8 +45,5 @@ and (min-width: 750px) and (max-width: 969px) {
 
 @media only screen
 and (max-width: 749px) {
-	aside {
-		display: block;
-		width: 100%;
-	}
+
 }/* /MEDIA QUERY */

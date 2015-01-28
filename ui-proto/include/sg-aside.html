@@ -1,13 +1,15 @@
 <aside>
-	<section class="profile">
-		<img class="thumbnail" src="images/no-profile.jpg" style="width: 100%; height: auto">
-		<p class="profile-text">
-			<strong>{{ UserCtrl.curUser.name }}</strong><br>
-			{{ UserCtrl.curUser.major }}<br>
-		</p>
-	</section>
-	<nav>
-		<button class="btn btn-success">Ongoing Classes</button>
-		<button class="btn btn-default">Finished Classes</button>
-	</nav>
+	<div class="md lg">
+		<section class="profile">
+			<img class="thumbnail" src="images/no-profile.jpg">
+			<p class="profile-text">
+				<strong>{{ UserCtrl.curUser.name }}</strong><br>
+				{{ UserCtrl.curUser.major }}<br>
+			</p>
+		</section>
+		<nav>
+			<button class="btn btn-success"><span class="btn-text">Ongoing Classes</span></button>
+			<button class="btn btn-default">Finished Classes</button>
+		</nav>
+	</div>
 </aside>
