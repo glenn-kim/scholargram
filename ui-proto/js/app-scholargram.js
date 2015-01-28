@@ -18,7 +18,23 @@
 			templateUrl: "include/sg-header.html",
 			replace: true
 		}
-	});// D/commonHeader
+	});// D/sgHeader
+	
+	app.directive("sgAside", function() {
+		return {
+			restrict: "E",
+			templateUrl: "include/sg-aside.html",
+			replace: true
+		}
+	});// D/sgAside
+	
+	app.directive("sgArticle", function() {
+		return {
+			restrict: "E",
+			templateUrl: "include/sg-article.html",
+			replace: true
+		}
+	});// D/sgArticle
 	
 	
 	// Controller Declaration
@@ -45,6 +61,19 @@
 		// init
 		self.authenticate("min20@nhnnext.org", "1234");
 	}]);// C/commonUserCtrl
+	
+	app.controller("DashboardController", ["$http", "$log", function($http, $log) {
+		var self = this;
+		
+		self.getDashboardData = function() {
+			$http.get("json/dashboard.json").
+				success(function(data) {
+					self.contents = data;
+				});
+		};
+		
+		self.getDashboardData();
+	}]);
 	
 })();
 

@@ -1,0 +1,11 @@
+<article ng-controller="DashboardController as DashboardCtrl">
+	<section ng-repeat="section in DashboardCtrl.contents">
+		<header><h2>{{ section.type }}</h2></header>
+		<section ng-repeat="class in section.classes">
+			<h3>{{ class.name }}</h3>
+			<p>{{ class.school }}</p>
+			<p>{{ class.startDate }} ~ {{ class.endDate }}</p>
+			<a>URL</a>, <a>Group Code</a>
+		</section>
+	</section>
+</article>
