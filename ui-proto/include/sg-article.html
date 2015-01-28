@@ -1,11 +1,23 @@
 <article ng-controller="DashboardController as DashboardCtrl">
 	<section ng-repeat="section in DashboardCtrl.contents">
 		<header><h2>{{ section.type }}</h2></header>
-		<section ng-repeat="class in section.classes">
+		<section ng-repeat="class in section.classes" class="class">
 			<h3>{{ class.name }}</h3>
-			<p>{{ class.school }}</p>
-			<p>{{ class.startDate }} ~ {{ class.endDate }}</p>
+			{{ class.school }}<br>
+			{{ class.startDate }} ~ {{ class.endDate }}<br>
 			<a>URL</a>, <a>Group Code</a>
+		</section>
+	</section>
+	
+	<section>
+		<header><h2>기타 Dashboard</h2></header>
+		<section>
+			<h3>적절한 그래프</h3>
+			<img class="thumbnail" style="width: 200px; height: 200px">
+		</section>
+		<section>
+			<h3>적절한 도표</h3>
+			<img class="thumbnail" style="width: 200px; height: 200px">
 		</section>
 	</section>
 </article>

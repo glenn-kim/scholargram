@@ -1,10 +1,13 @@
 <aside>
 	<section class="profile">
-		<p><strong>{{ UserCtrl.curUser.name }}</strong></p>
-		<p>{{ UserCtrl.curUser.email }}</p>
-		<p><strong>{{ UserCtrl.curUser.school }}</strong> {{ UserCtrl.curUser.major }}</p>
-		<p>{{ UserCtrl.curUser.identity }}</p>
+		<img class="thumbnail" src="images/no-profile.jpg" style="width: 100%; height: auto">
+		<p class="profile-text">
+			<strong>{{ UserCtrl.curUser.name }}</strong><br>
+			{{ UserCtrl.curUser.major }}<br>
+		</p>
 	</section>
-	<button class="btn btn-success">Ongoing Classes</button>
-	<button class="btn btn-default">Finished Classes</button>
+	<nav>
+		<button class="btn btn-success">Ongoing Classes</button>
+		<button class="btn btn-default">Finished Classes</button>
+	</nav>
 </aside>

@@ -1,37 +1,45 @@
 aside {
-	
+	vertical-align: top;
 }
 
+aside .profile {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.profile-text {
+	text-align: center;
+}
+
+aside nav {
+	width: 100%;
+	text-align: center;
+}
+
+aside nav > .btn {
+	margin-bottom: 10px;
+}
 
 @media only screen
 and (min-width: 970px) {
-	.lg {
-		display: block !important;
-	}
-	
-	.container {
-		width: 970px;
+	aside {
+		width: 200px;
+		padding-right: 30px;
 	}
 }
 
 @media only screen
 and (min-width: 750px) and (max-width: 969px) {
-	.md {
-		display: block !important;
-	}
-	
-	.container {
-		width: 750px;
+	aside {
+		width: 200px;
+		padding-right: 30px;
 	}
 }
 
 @media only screen
 and (max-width: 749px) {
-	.sm {
-		display: block !important;
-	}
-	
-	.container {
+	aside {
+		display: block;
 		width: 100%;
 	}
 }/* /MEDIA QUERY */
