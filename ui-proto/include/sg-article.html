@@ -1,7 +1,7 @@
 <article ng-controller="DashboardController as DashboardCtrl">
 	<section ng-repeat="section in DashboardCtrl.contents">
-		<header><h2>{{ section.type }}</h2></header>
-		<section ng-repeat="class in section.classes" class="class">
+		<header class="page-header"><h2>{{ section.type }}</h2></header>
+		<section ng-repeat="class in section.classes" class="class-section">
 			<h3>{{ class.name }}</h3>
 			{{ class.school }}<br>
 			{{ class.startDate }} ~ {{ class.endDate }}<br>
@@ -10,14 +10,14 @@
 	</section>
 	
 	<section>
-		<header><h2>기타 Dashboard</h2></header>
-		<section>
+		<header class="page-header"><h2>기타 Dashboard</h2></header>
+		<section class="class-section">
 			<h3>적절한 그래프</h3>
-			<img class="thumbnail" style="width: 200px; height: 200px">
+			<img class="thumbnail" src="images/no-graph.jpg">
 		</section>
-		<section>
+		<section class="class-section">
 			<h3>적절한 도표</h3>
-			<img class="thumbnail" style="width: 200px; height: 200px">
+			<img class="thumbnail" src="images/no-chart.jpg">
 		</section>
 	</section>
 </article>

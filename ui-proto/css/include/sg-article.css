@@ -1,3 +1,49 @@
 article {
 	vertical-align: top;
 }
+
+article > * {
+	display: block;
+	position: relative;
+}
+
+article > *:nth-child(1) {
+	margin-top: -20px;
+}
+
+article h2 {
+	margin: 0;
+}
+
+article h3 {
+	margin: 0px 0px 10px;
+}
+
+.class-section {
+	display: inline-block;
+	padding: 18px;
+	margin: 12px;
+	color: #333;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+}
+
+
+@media only screen
+and (min-width: 970px) {
+	
+}
+
+@media only screen
+and (min-width: 750px) and (max-width: 969px) {
+
+}
+
+@media only screen
+and (max-width: 749px) {
+	.class-section {
+		display: block;
+	}
+}/* /MEDIA QUERY */
+
