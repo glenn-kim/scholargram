@@ -15,17 +15,29 @@ import models.Major._
 object Users {
   
   lazy val tQuery = ScholargramTables.Users
-  
+  val userDetailQuery = (tQuery
+      leftJoin (Students leftJoin Majors on (_.majorid === _.majorid)
+                        leftJoin Schools on (_._2.schoolid === _.schoolid) map (x=>(x._1._1,x._1._2,x._2)))
+       on (_.userid === _._1.userid)
+      leftJoin (Professors leftJoin Schools on (_.work === _.schoolid))
+        on (_._1.userid === _._1.userid)
+      map{set=>(set._1._1, set._1._2._1.?, set._1._2._2.?, set._1._2._3.?, set._2._1.?, set._2._2.?)})
+
+
   abstract case class User(id:Int, name:String, userType:String){
     val userDetail:JsObject
   }
 
   class Professor(override val id:Int, override val name:String, work:School) extends User(id,name,"professor"){
+    def this(user:UsersRow, student:ProfessorsRow, school:SchoolsRow)=
+      this(user.userid,user.name,new School(school))
     lazy val userDetail = Json.obj(
       "work"->Json.toJson(work)
     )
   }
   class Student(override val id:Int, override val name:String, identity:Option[String], major:Major) extends User(id,name,"student"){
+    def this(user:UsersRow, student:StudentsRow, major:MajorsRow, school:SchoolsRow)=
+      this(user.userid,user.name,student.defaultidentity,new Major(major,school))
     lazy val userDetail = Json.obj(
       "identity"->identity,
       "major"->Json.toJson(major)
@@ -57,16 +69,20 @@ object Users {
   def apply(email:String, password:String)(implicit session : Session)={
     val encryptedPassword = encrypt(password)
     
-    val userRow = tQuery.filter(_.email === email).filter(_.passwd === encryptedPassword).firstOption
+    val userRow = userDetailQuery.filter(_._1.email === email).filter(_._1.passwd === encryptedPassword).firstOption
     userRow map getUsers
   }
 
-  def apply(userid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)={
-    val userRow = tQuery.filter(_.userid === userid).firstOption
-    userRow map getUsers
+  def apply(userid:Int)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef)=
+    userDetailQuery.filter(_._1.userid === userid).firstOption.map(getUsers)
+
+  type detailType = (UsersRow,Option[StudentsRow], Option[MajorsRow], Option[SchoolsRow], Option[ProfessorsRow], Option[SchoolsRow])
+  private[models] def getUsers(set:detailType)=set match{ case (row:UsersRow,stu:Option[StudentsRow], stu_major:Option[MajorsRow], stu_school:Option[SchoolsRow], prof:Option[ProfessorsRow], prof_work:Option[SchoolsRow])=>
+    if(stu.isDefined)
+      new Student(row,stu.get,stu_major.get,stu_school.get)
+    else
+      new Professor(row,prof.get,prof_work.get)
   }
-  
-  private def getUsers(row:UsersRow)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef):User = getStudent(row) getOrElse getProfessor(row).get
   
   private lazy val studentJoin =  Students leftJoin Majors on (_.majorid === _.majorid) leftJoin Schools on (_._2.schoolid === _.schoolid)
   private[models] def getStudent(row:UsersRow)(implicit session : scala.slick.jdbc.JdbcBackend#SessionDef):Option[Student]={
