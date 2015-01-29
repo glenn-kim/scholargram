@@ -4,7 +4,6 @@ article {
 
 article > * {
 	display: block;
-	position: relative;
 }
 
 article > *:nth-child(1) {
@@ -27,6 +26,11 @@ article h3 {
 	background-color: #ffffff;
 	border: 1px solid #cccccc;
 	border-radius: 8px;
+}
+
+.class-section .thumbnail {
+	display: block;
+	margin: 0 auto;
 }
 
 
