@@ -231,7 +231,7 @@ ENGINE = InnoDB;
 -- Table Attachments
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Attachments (
-  attachmentId CHAR(128) NOT NULL AUTO_INCREMENT,
+  attachmentId CHAR(128) NOT NULL ,
   owner INT NOT NULL,
   directory VARCHAR(250) NOT NULL,
   filename VARCHAR(250) NOT NULL,

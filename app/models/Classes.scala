@@ -65,4 +65,7 @@ object Classes {
     case _=>
       throw new InvalidDataIntegraityException("user must be student or professor");
   }
+  
+  def checkPerm(classId:Int)(implicit session:Session, prof:User) = 
+    tQuery.filter(t=>t.classid === classId && t.professorid === prof.id).firstOption.isDefined
 }

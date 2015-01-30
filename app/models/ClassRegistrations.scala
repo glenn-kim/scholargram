@@ -50,5 +50,8 @@ object ClassRegistrations {
       .filter(_._1._1.classid === classId)
       .list
       .map(x=>new ClassRegistration(Users.getUsers(x._2),x._1._1))
+  
+  def checkPerm(classId:Int,permLevel:Int = 1)(implicit session : Session, student:Users.User)=
+    tQuery.filter(t=>t.classid === classId && t.userid === student.id && t.accepted >= permLevel).firstOption.isDefined
 }
 

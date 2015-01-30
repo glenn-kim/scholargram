@@ -3,4 +3,5 @@
  */
 package object exception {
   class InvalidDataIntegraityException(msessage:String) extends Exception(msessage)
+  class DoesNotHavePermissionException(msessage:String) extends Exception(msessage)
 }

@@ -1,3 +1,10 @@
+DELETE FROM "AssignmentAttachments";
+DELETE FROM "LectureAttachments";
+DELETE FROM "Attachments";
+DELETE FROM "Alerts";
+DELETE FROM "Assignments";
+DELETE FROM "Lectures";
+DELETE FROM "TimelineItems";
 DELETE FROM "ClassRegistrations";
 DELETE FROM "Classes";
 DELETE FROM "Professors";
@@ -80,3 +87,53 @@ INSERT INTO "ClassRegistrations" VALUES
   (5,1,'14Ricky Lee',10, '2015-10-14 13:22:51',1),
   (6,1,'14Doho Lee',13, '2015-10-14 13:22:12',1),
   (7,1,'14박태준',3, '2015-10-14 13:22:24',1);
+
+INSERT INTO "TimelineItems" VALUES
+  (1,1,1,'2014-12-29 12:30:01'),
+  (2,1,1,'2014-12-29 12:30:01'),
+  (3,1,1,'2014-12-29 12:30:01'),
+  (4,1,1,'2014-12-30 16:30:01'),
+  (5,1,1,'2014-12-30 17:30:01'),
+  (6,1,1,'2014-12-30 18:30:01'),
+  (7,1,1,'2014-12-31 12:30:01'),
+  (8,1,1,'2014-12-31 13:30:01'),
+  (9,1,1,'2014-12-31 14:30:01');
+
+INSERT INTO "Alerts" VALUES 
+  (1,'hello there'),
+  (4,'안녕? 칭구들?'),
+  (7,'가나다라마바사?');
+
+INSERT INTO "Assignments" VALUES 
+  (2,'1주차 과제','가나다라마바사 이렇쿵 저렇쿵.','2015-1-1 12:30:30'),
+  (5,'2주차 과제','가나다라마바사 이렇쿵 저렇쿵.','2015-1-4 12:30:30'),
+  (8,'3주차 과제','가나다라마바사 이렇쿵 저렇쿵.','2015-1-6 12:30:30');
+
+INSERT INTO "Lectures" VALUES
+  (3, '1주차 과제.'),
+  (6, '3주차 과제.'),
+  (9, '4주차 과제.');
+  
+INSERT INTO "Attachments" VALUES 
+  ('aaaaaaaaaaa',9,'~/abc','file1'),
+  ('bbbbbbbbbbb',9,'~/def','file2'),
+  ('ccccccccccc',9,'~/asd','file3'),
+  ('ddddddddddd',9,'~/qqq','file4'),
+  ('eeeeeeeeeee',9,'~/www','file5'),
+  ('fffffffffff',9,'~/www','file6'),
+  ('ggggggggggg',9,'~/www','file7'),
+  ('hhhhhhhhhhh',9,'~/www','file8'),
+  ('iiiiiiiiiii',9,'~/www','file9');
+  
+INSERT INTO "AssignmentAttachments" VALUES 
+  ('aaaaaaaaaaa',9,2),
+  ('bbbbbbbbbbb',9,2),
+  ('ccccccccccc',9,5),
+  ('ddddddddddd',9,8);
+
+INSERT INTO "LectureAttachments" VALUES
+  ('eeeeeeeeeee',9,3),
+  ('fffffffffff',9,3),
+  ('ggggggggggg',9,3),
+  ('hhhhhhhhhhh',9,9),
+  ('iiiiiiiiiii',9,9);

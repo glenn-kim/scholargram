@@ -6,24 +6,24 @@
 GET           /                                            controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                                controllers.Assets.at(path="/public", file)
+GET           /assets/*file                                 controllers.Assets.at(path="/public", file)
 
 #UserLogin
-GET           /login                                       controllers.UserLogin.loginUI
-POST          /login                                       controllers.UserLogin.login
-POST          /logout                                      controllers.UserLogin.logout
-GET           /me                                          controllers.UserLogin.me
+GET           /login                                        controllers.UserLogin.loginUI
+POST          /login                                        controllers.UserLogin.login
+POST          /logout                                       controllers.UserLogin.logout
+GET           /me                                           controllers.UserLogin.me
 
 #Class
-GET           /classes                                     controllers.ClassController.classList
+GET           /classes                                      controllers.ClassController.classList
 #GET           /:classid                                    controllers.ClassController.TODO
-GET           /:classid/students                           controllers.ClassController.registeredList(classid:Int)
 #POST          /:classId/registration                       controllers.ClassController.TODO
-#GET           /:classId/registration                       controllers.ClassController.TODO
+GET           /:classId/registrations                       controllers.ClassController.registeredList(classId:Int)
 #
 #
 ##Pages in Class
-#GET           /:classId/timeline                           controllers.Application.TODO
+GET           /:classId                           			controllers.TimelineController.getTimelineUI(classId: Int)
+GET           /:classId/timeline                            controllers.TimelineController.getTimelineItems(classId:Int)
 #GET           /:classId/submissions                        controllers.Application.TODO
 #GET           /:classId/qna                                controllers.Application.TODO
 #
@@ -33,15 +33,13 @@ GET           /:classid/students                           controllers.ClassCont
 #POST          /:classId/qna/:questionId                    controllers.Application.TODO
 #DELETE        /:classId/qna/:questionId                    controllers.Application.TODO
 #
-##Timeline
-##post timeline item
-#POST          /:classId/assignments                        controllers.Application.TODO
-#POST          /{classId}/alerts                            controllers.Application.TODO
-#POST          /{classId}/lectures                          controllers.Application.TODO
+#Timeline
+#post timeline item
+POST          /:classId/timeline                            controllers.TimelineController.postTimeline(classId:Int)
 #
 #
 ##item get/delete/update
-#GET           /:classId/:itemId                            controllers.Application.TODO
+GET           /:classId/:itemId                             controllers.TimelineController.getTimelineItem(classId: Int, itemId: Int)
 #DELETE        /:classId/:itemId                            controllers.Application.TODO
 #POST          /:classId/:itemId                            controllers.Application.TODO
 #
