@@ -57,7 +57,7 @@
 		self.getDashboardData = function() {
 			$http.get("json/dashboard").
 				success(function(data) {
-					self.contents = data;
+					self.classTypes = data;
 				});
 		};
 		

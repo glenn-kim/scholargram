@@ -50,17 +50,17 @@
 		init();
 	}]);// C/MainController
 	
-	appTimeline.controller("DashboardController", ["$http", "$log", function($http, $log) {
+	appTimeline.controller("TimelineController", ["$http", function($http) {
 		var self = this;
 		
-		self.getDashboardData = function() {
-			$http.get("json/dashboard").
+		self.getTimelineData = function() {
+			$http.get("json/timeline").
 				success(function(data) {
-					self.contents = data;
+					self.items = data;
 				});
 		};
 		
-		self.getDashboardData();
+		self.getTimelineData();
 	}]);
 	
 	

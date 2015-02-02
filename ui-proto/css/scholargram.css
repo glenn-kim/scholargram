@@ -1,4 +1,10 @@
 /* scholargram.css */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video,textarea {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 * {
 	box-sizing: border-box;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -28,7 +34,7 @@ html {
 
 body {
 	position: relative;
-	padding-top: 70px;
+	padding-top: 80px;
 	min-height: 100%;
 }
 
@@ -608,5 +614,43 @@ fieldset[disabled] .btn-link:focus {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.label {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+}
+
+.label-default {
+	background-color: #777;
+}
+
+.label-primary {
+	background-color: #337ab7;
+}
+
+.label-success {
+	background-color: #5cb85c;
+}
+
+.label-info {
+	background-color: #5bc0de;
+}
+
+.label-warning {
+	background-color: #f0ad4e;
+}
+
+.label-danger {
+	background-color: #d9534f;
+}
+
 /* /bootstrap styles */
 

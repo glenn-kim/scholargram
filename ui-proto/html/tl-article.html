@@ -1,23 +1,24 @@
-<article ng-controller="DashboardController as DashboardCtrl">
-	<section ng-repeat="section in DashboardCtrl.contents">
-		<header class="page-header"><h2>{{ section.type }}</h2></header>
-		<section ng-repeat="class in section.classes" class="class-section">
-			<h3>{{ class.name }}</h3>
-			{{ class.school }}<br>
-			{{ class.startDate }} to {{ class.endDate }}<br>
-			<a>URL</a>, <a>Group Code</a>
+<article class="article" ng-controller="TimelineController as TimelineCtrl">
+	<!-- TODO timeline 글쓰기 textbox 및 버튼 등 만들 것 -->
+	<section class="item" ng-repeat="item in TimelineCtrl.items">
+		<header>
+			<!-- TODO ng-switch로 type에 따라 다른 색갈 label 붙일 것! -->
+			<h3 class="item-type label label-default">{{ item.type }}</h3>
+		</header>
+		<section class="item-info table table-horizontal">
+			<div class="item-author-img">
+				<img src="images/no-profile.jpg">
+			</div>
+			<div class="item-info-text">
+				<div class="item-author">{{ item.author }}</div>
+				<div class="item-datetime">{{ item.publishDatetime }}</div>
+			</div>
 		</section>
-	</section>
-	
-	<section>
-		<header class="page-header"><h2>기타 Dashboard</h2></header>
-		<section class="class-section">
-			<h3>적절한 그래프</h3>
-			<img class="thumbnail" src="images/no-graph.jpg">
+		<section class="item-contents">
+			{{ item.contents }}
 		</section>
-		<section class="class-section">
-			<h3>적절한 도표</h3>
-			<img class="thumbnail" src="images/no-chart.jpg">
-		</section>
+		<nav>
+			<a>댓글 달기</a>
+		</nav>
 	</section>
 </article>

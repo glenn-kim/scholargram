@@ -1,7 +1,7 @@
 <article ng-controller="DashboardController as DashboardCtrl">
-	<section ng-repeat="section in DashboardCtrl.contents">
-		<header class="page-header"><h2>{{ section.type }}</h2></header>
-		<section ng-repeat="class in section.classes" class="class-section">
+	<section ng-repeat="classType in DashboardCtrl.classTypes">
+		<header class="page-header"><h2>{{ classType.type }}</h2></header>
+		<section ng-repeat="class in classType.classes" class="class-section">
 			<h3>{{ class.name }}</h3>
 			{{ class.school }}<br>
 			{{ class.startDate }} to {{ class.endDate }}<br>
