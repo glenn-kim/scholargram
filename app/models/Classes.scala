@@ -1,13 +1,13 @@
 package models
 
 import java.sql.{Date, Timestamp}
-import javax.servlet.Registration
 
-import exception.InvalidDataIntegraityException
-import models.Users.{User, Professor}
-import play.api.libs.json.{Json, JsValue, Writes}
+import controllers.ClassController
+import exception.{DoesNotHavePermissionException, InvalidDataIntegraityException}
+import models.ScholargramTables._
+import models.Users.User
 import play.api.db.slick.Config.driver.profile.simple._
-import ScholargramTables._
+import play.api.libs.json.{JsValue, Json, Writes}
 
 /**
  * Created by infinitu on 15. 1. 22..
@@ -65,7 +65,35 @@ object Classes {
     case _=>
       throw new InvalidDataIntegraityException("user must be student or professor");
   }
-  
+
+  def create(form:ClassController.CreateForm)(implicit session : Session, user:User) = user match {
+    case User(id, name, "student") =>
+      throw new DoesNotHavePermissionException("students can't request it.")
+    case User(id,name,"professor")=>
+      val newId = 
+        (tQuery returning tQuery.map(_.classid)) += ScholargramTables.ClassesRow(0, form.className, id,
+          form.startDate,form.endDate,new Timestamp(System.currentTimeMillis()),form.schoolId)
+      
+      apply(newId)
+  }
+
+  def update(classId:Int, form:ClassController.UpdateForm)(implicit session : Session, user:User) = user match {
+    case User(id, name, "student") =>
+      throw new DoesNotHavePermissionException("students can't request it.")
+    case User(id,name,"professor")=>
+      tQuery.filter(t=>t.classid === classId && t.professorid === id).firstOption
+        .map{cls =>
+          tQuery.filter(_.classid === classId).update(
+            ScholargramTables.ClassesRow(cls.classid,
+              form.className.getOrElse(cls.classname),cls.professorid,
+              if(form.startDate.isDefined) form.startDate else cls.startdate,
+              if(form.endDate.isDefined) form.endDate else cls.enddate,
+              cls.createdatetime, form.schoolId.getOrElse(cls.schoolid)))
+          apply(cls.classid).get
+        }
+        .getOrElse(throw new DoesNotHavePermissionException("does not have permission in this Class"))
+  }
+
   def checkPerm(classId:Int)(implicit session:Session, prof:User) = 
     tQuery.filter(t=>t.classid === classId && t.professorid === prof.id).firstOption.isDefined
 }
