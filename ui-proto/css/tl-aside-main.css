@@ -1,0 +1,75 @@
+.aside-main {
+	display: table-cell;
+	vertical-align: top;
+	z-index: 100;
+}
+
+.aside-main .profile {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.aside-main .profile img {
+	width: 100%;
+	height: auto;
+}
+
+.profile-text {
+	text-align: center;
+}
+
+.aside-main nav {
+	width: 100%;
+	text-align: center;
+}
+
+.aside-main nav > .btn {
+	width: 150px;
+	margin-bottom: 10px;
+}
+
+@media only screen
+and (min-width: 970px) {
+	.aside-main {
+		width: 200px;
+		padding-right: 30px;
+	}
+}
+
+@media only screen
+and (min-width: 750px) and (max-width: 969px) {
+	.aside-main {
+		width: 200px;
+		padding-right: 30px;
+	}
+	
+	.aside-main .aside-etc .md {
+		display: block;
+		width: 100%;
+	}
+}
+
+@media only screen
+and (max-width: 749px) {
+	.container .aside-main {
+		display: block;
+		width: 0px;
+	}
+	
+	.aside-main .sm.table {
+		position: fixed;
+		top: 50px;
+		bottom: 0px;
+		left: 100%;
+		width: 260px;
+		padding: 0px 20px;
+		background-color: #eee;
+		border-left: 2px solid #ddd;
+		transition: all .3s ease-in-out;
+	}
+	
+	.aside-main .aside-etc .sm {
+		display: block;
+		width: 100%;
+	}
+}/* /MEDIA QUERY */

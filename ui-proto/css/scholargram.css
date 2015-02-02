@@ -39,7 +39,7 @@ body {
 .container {
 	padding-right: 15px;
 	padding-left: 15px;
-	padding-bottom: 40px;
+	padding-bottom: 120px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -75,12 +75,20 @@ body {
 }
 
 footer {
+	display: block;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
 	height: 80px;
+	width: 100%;
 	background-color: #e7e7e7;
 	border-top: 1px solid #ccc;
 	box-shadow: 0px 0px 5px #aaa;
 }
 
+.clear {
+	clear: both;
+}
 
 .sm,
 .md,
@@ -95,6 +103,10 @@ and (min-width: 970px) {
 		display: block;
 	}
 	
+	.table > .lg {
+		display: table-cell;
+	}
+	
 	.container {
 		width: 970px;
 	}
@@ -104,6 +116,10 @@ and (min-width: 970px) {
 and (min-width: 750px) and (max-width: 969px) {
 	.md {
 		display: block;
+	}
+	
+	.table > .md {
+		display: table-cell;
 	}
 	
 	.container {
@@ -117,6 +133,10 @@ and (max-width: 749px) {
 		display: block;
 	}
 	
+	.table > .sm {
+		display: table-cell;
+	}
+
 	.container {
 		position: relative;
 		width: 100%;

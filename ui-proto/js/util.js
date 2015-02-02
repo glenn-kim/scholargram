@@ -25,10 +25,6 @@ function isString(target) {
 	return true;
 }
 
-HTMLElement.prototype.getStyleValue = function(strStyle) {
-	return window.getComputedStyle(this.node).getPropertyValue(strStyle);
-};
-
 HTMLElement.prototype.hasClassName = function(strClassName) {
 	if (isString(strClassName)) {
 		console.error("hasClassName: Missing className to search");

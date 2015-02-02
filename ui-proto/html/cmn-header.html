@@ -1,4 +1,4 @@
-<header class="header header-fixed-top">
+<header class="header header-fixed-top" ng-controller="HeaderController as HeaderCtrl">
 	<section class="container">
 		<section class="header-left">
 			<div class="lg">
@@ -33,7 +33,7 @@
 			</div>
 			<div class="sm">
 				<div class="table table-horizontal">
-					<a class="header-link" ng-click="headerCtrl.toggleAside()">
+					<a class="header-link" ng-click="HeaderCtrl.toggleAside()">
 						<span class="glyphicon glyphicon-menu-hamburger"></span>
 					</a>
 				</div>

@@ -62,10 +62,4 @@ and (max-width: 749px) {
 		border-left: 2px solid #ddd;
 		transition: all .3s ease-in-out;
 	}
-	
-	aside .sm.on {
-		-webkit-transform: translate3d(-260px, 0, 0);
-		   -moz-transform: translate3d(-260px, 0, 0);
-		        transform: translate3d(-260px, 0, 0);
-	}
 }/* /MEDIA QUERY */
