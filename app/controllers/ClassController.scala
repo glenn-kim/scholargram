@@ -27,20 +27,6 @@ object ClassController extends Controller{
       .map(Ok(_))
       .getOrElse(UserLogin.loginNessesery)
   }
-
-  def registeredList(classId:Int) = DBAction{req=>
-    UserLogin.loginedMe(req)
-      .map {
-      case User(id, name, "student") =>
-        forbidden
-      case User(id, name, "professor") =>
-        val clsreg = ClassRegistrations(id,classId)(req.dbSession).map(Json.toJson(_))
-        Ok(JsArray(clsreg))
-      case _ =>
-        throw new InvalidDataIntegraityException("user must be student or professor");
-    }.getOrElse(UserLogin.loginNessesery)
-  }
-  
   
   case class CreateForm(className:String, startDate:Option[Date], endDate:Option[Date], schoolId:Int)
   implicit val createFormReads:Reads[CreateForm] =

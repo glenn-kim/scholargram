@@ -5,7 +5,7 @@ import java.sql.Timestamp
 import exception.{DoesNotHavePermissionException, InvalidDataIntegraityException}
 import models.Attachments._
 import models.ScholargramTables._
-import play.api.db.slick.Config.driver.profile.simple._
+import models.ScholargramTables.profile.simple._
 import play.api.libs.json.{JsObject, JsValue, Json, Writes}
 
 

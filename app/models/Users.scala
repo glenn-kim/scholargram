@@ -4,7 +4,7 @@ import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
 import ScholargramTables._
-import play.api.db.slick.Config.driver.profile.simple._
+import models.ScholargramTables.profile.simple._
 import models.School._
 import models.Major._
 
@@ -114,4 +114,3 @@ object Users {
   
 }
 
-class InvalidateParameterException(message:String) extends Exception(message)

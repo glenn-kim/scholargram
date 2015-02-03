@@ -7,7 +7,7 @@ import models.ScholargramTables._
 import models.Users.User
 import models.Users.userWrites
 import models.Attachments.attachmentWrites
-import play.api.db.slick.Config.driver.profile.simple._
+import models.ScholargramTables.profile.simple._
 import play.api.libs.json.{Json, JsValue, Writes}
 
 

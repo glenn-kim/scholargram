@@ -20,8 +20,8 @@ POST         /classes                       controllers.ClassController.createCl
 PATCH        /:classId                      controllers.ClassController.updateClass(classId:Int)
 
 #GET           /:classid                                    controllers.ClassController.TODO
-#POST          /:classId/registration                       controllers.ClassController.TODO
-GET          /:classId/registrations        controllers.ClassController.registeredList(classId:Int)
+POST         /:classId/registration         controllers.ClassRegistrationController.acceptRegister(classId:Int)
+GET          /:classId/registrations        controllers.ClassRegistrationController.registeredList(classId:Int)
 #
 #
 ##Pages in Class

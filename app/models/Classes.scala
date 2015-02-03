@@ -6,7 +6,7 @@ import controllers.ClassController
 import exception.{DoesNotHavePermissionException, InvalidDataIntegraityException}
 import models.ScholargramTables._
 import models.Users.User
-import play.api.db.slick.Config.driver.profile.simple._
+import models.ScholargramTables.profile.simple._
 import play.api.libs.json.{JsValue, Json, Writes}
 
 /**
