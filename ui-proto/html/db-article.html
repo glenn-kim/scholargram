@@ -1,11 +1,15 @@
 <article ng-controller="DashboardController as DashboardCtrl">
-	<section ng-repeat="classType in DashboardCtrl.classTypes">
-		<header class="page-header"><h2>{{ classType.type }}</h2></header>
-		<section ng-repeat="class in classType.classes" class="class-section">
-			<h3>{{ class.name }}</h3>
-			{{ class.school }}<br>
-			{{ class.startDate }} to {{ class.endDate }}<br>
-			<a>URL</a>, <a>Group Code</a>
+	<section ng-repeat="oType in DashboardCtrl.classes">
+		<section ng-repeat="(type, classes) in oType">
+			<header class="page-header">
+				<h2>{{ type | capitalize }}</h2>
+			</header>
+			<section ng-repeat="class in classes" class="class-section">
+				<h3>{{ class.name }}</h3>
+				{{ class.school }}<br>
+				{{ class.startDate | date: "MMM, yyyy" }} - {{ class.endDate | date: "MMM, yyyy" }}<br>
+				<a>URL</a>, <a>Group Code</a>
+			</section>
 		</section>
 	</section>
 	

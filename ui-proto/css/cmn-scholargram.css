@@ -201,7 +201,10 @@ input {
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-textarea:focus,
+textarea:focus {
+	outline: 0;	
+}
+
 input:focus {
 	border-color: #66afe9;
 	outline: 0;

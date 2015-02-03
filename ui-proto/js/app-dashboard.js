@@ -1,5 +1,5 @@
 (function() {
-	var appDashboard = angular.module("appDashboard", ["cmnUser", "cmnHeader"]);
+	var appDashboard = angular.module("appDashboard", ["cmnUser", "cmnHeader", "customFilters"]);
 		
 	/*
 		NOTE!
@@ -39,7 +39,7 @@
 		var self = this;
 		var _sAsideSelector = "aside .sm.table"
 		
-		var getUser = function() {
+		var init = function() {
 			uf.getMe().
 				success(function(curUser) {
 					self.curUser = curUser;
@@ -48,16 +48,35 @@
 			hf.setAsideSelector(_sAsideSelector);
 		};
 		
-		getUser();
+		init();
 	}]);// C/MainController
 	
-	appDashboard.controller("DashboardController", ["$http", "$log", function($http, $log) {
+	appDashboard.controller("DashboardController", ["$http", function($http, $log) {
 		var self = this;
+		var curDate = new Date();
+		
+		self.classes = [
+			{ ongoing: [] },
+			{ planned: [] },
+			{ finished: [] }
+		];
 		
 		self.getDashboardData = function() {
-			$http.get("json/dashboard").
-				success(function(data) {
-					self.classTypes = data;
+			$http.get("json/classes").
+				success(function(classes) {
+					for (var idx in classes) {
+						var klass = classes[idx];
+
+						if (klass.startDate <= curDate ) {
+							if (curDate <= klass.endDate) {
+								self.classes[0].ongoing.push(klass);
+							} else {
+								self.classes[2].finished.push(klass);
+							}
+						} else {
+							self.classes[1].planned.push(klass);
+						}
+					}
 				});
 		};
 		

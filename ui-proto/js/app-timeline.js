@@ -14,7 +14,10 @@
 		return {
 			restrict: "E",
 			templateUrl: "html/tl-article.html",
-			replace: true
+			replace: true,
+			controller: function() {
+				$("textarea").autosize();
+			}
 		}
 	});// D/tlArticle
 	

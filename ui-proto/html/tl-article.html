@@ -1,23 +1,32 @@
 <article class="article" ng-controller="TimelineController as TimelineCtrl">
 	<!-- TODO timeline 글쓰기 textbox 및 버튼 등 만들 것 -->
-	<section class="item" ng-repeat="item in TimelineCtrl.items">
-		<header>
-			<!-- TODO ng-switch로 type에 따라 다른 색갈 label 붙일 것! -->
-			<h3 class="item-type label label-default">{{ item.type }}</h3>
+	<section class="article-item">
+		<textarea class="article-write-box"></textarea>
+		<nav class="article-nav">
+			<button class="btn btn-primary">Hohohoo</button>
+		</nav>
+	</section>
+	<section class="article-item" ng-repeat="item in TimelineCtrl.items">
+		<header ng-switch="{{ item.type }}">
+			<h3 ng-switch-when="1" class="article-item-type label label-primary">Quiz</h3>
+			<h3 ng-switch-when="2" class="article-item-type label label-success">질문</h3>
+			<h3 ng-switch-when="3" class="article-item-type label label-warning">강의자료</h3>
+			<h3 ng-switch-when="4" class="article-item-type label label-danger">과제제출</h3>
+			<h3 ng-switch-default class="article-item-type label label-default">기타</h3>
 		</header>
-		<section class="item-info table table-horizontal">
-			<div class="item-author-img">
+		<section class="article-item-info table table-horizontal">
+			<div class="article-item-author-img">
 				<img src="images/no-profile.jpg">
 			</div>
-			<div class="item-info-text">
-				<div class="item-author">{{ item.author }}</div>
-				<div class="item-datetime">{{ item.publishDatetime }}</div>
+			<div class="article-item-info-text">
+				<div class="article-item-author">{{ item.author }}</div>
+				<div class="article-item-datetime">{{ item.publishDatetime }}</div>
 			</div>
 		</section>
-		<section class="item-contents">
+		<section class="article-item-contents">
 			{{ item.contents }}
 		</section>
-		<nav>
+		<nav class="article-comment">
 			<a>댓글 달기</a>
 		</nav>
 	</section>

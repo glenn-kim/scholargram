@@ -5,7 +5,6 @@
 }
 
 .aside .profile {
-	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
@@ -26,5 +25,5 @@
 
 .aside nav > .btn {
 	width: 150px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
