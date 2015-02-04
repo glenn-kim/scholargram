@@ -4,7 +4,7 @@ package models
 import java.sql.Timestamp
 
 import controllers.ClassRegistrationController
-import exception.{DoesNotHavePermissionException, NoSuchRowException}
+import exception.{AlreadyRegistrated, DoesNotHavePermissionException, NoSuchRowException}
 import models.Users.User
 import play.api.libs.json.{JsValue, Json, Writes}
 import models.ScholargramTables._
@@ -68,6 +68,18 @@ object ClassRegistrations {
     if(sqlResult<1)
       throw new NoSuchRowException("can't find such row")
   }
+  
+  def register(classId:Int, form:ClassRegistrationController.JoinForm)(implicit session:Session, stu:Users.User){
+    if(checkPerm(classId,0))
+      throw new AlreadyRegistrated("alread registrated")
+    
+    tQuery += 
+      ClassregistrationsRow(
+        stu.id, classId,
+        form.identity.getOrElse((stu.userDetail \ "identity").as[String]),
+        form.major.getOrElse((stu.userDetail \ "major" \ "name").as[String]),
+        new Timestamp(System.currentTimeMillis()), 0)
+   }
   
   def checkPerm(classId:Int,permLevel:Int = 1)(implicit session : Session, student:Users.User)=
     tQuery.filter(t=>t.classid === classId && t.userid === student.id && t.accepted >= permLevel).firstOption.isDefined

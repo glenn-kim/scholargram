@@ -3,7 +3,7 @@ package controllers
 import java.sql.Date
 
 import controllers.ClassController._
-import exception.InvalidDataIntegraityException
+import exception.{InvalidateParameterException, InvalidDataIntegraityException}
 import models.{ClassRegistrations, Classes, Users}
 import models.Users.{User, userWrites}
 import play.api.db.slick.DBAction
@@ -49,6 +49,8 @@ object ClassRegistrationController extends Controller{
             obj.asOpt[AcceptForm].map(Seq(_))
           case arr:JsArray=>
             arr.asOpt[Seq[AcceptForm]]
+          case _=>
+            throw new InvalidateParameterException("it allow jsobject and jsarray")
         }
         .map{inp=>
           DB.withTransaction{ implicit session=>
@@ -63,4 +65,27 @@ object ClassRegistrationController extends Controller{
         }.getOrElse(badrequest)
       }.getOrElse(UserLogin.loginNessesery)
   }
+  
+  case class JoinForm(identity:Option[String], major:Option[String])
+  implicit val JoinFormReads:Reads[JoinForm] =
+    ((JsPath \ "identity").readNullable[String] and (JsPath \ "major").readNullable[String])(JoinForm.apply _)
+  
+  def registerClass(classId:Int)=DBAction { req =>
+    UserLogin.loginedMe(req)
+      .map { implicit user =>
+        implicit val session = req.dbSession
+          user match {
+            case User(id, name, "student") =>
+              req.body.asJson.flatMap(_.asOpt[JoinForm])
+                .map{ form=>
+                  ClassRegistrations.register(classId,form)
+                  Ok("Successfully")
+                }
+                .getOrElse(badrequest)
+            case User(id, name, "professor") =>
+            forbidden
+          }
+        }
+      .getOrElse(UserLogin.loginNessesery)
+  } 
 }

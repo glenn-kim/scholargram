@@ -24,7 +24,6 @@ object School{
       "location"->o.location
     )
   }
-  
 }
 object Major{
   implicit val MajorWrites = new Writes[Major] {

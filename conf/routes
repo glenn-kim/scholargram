@@ -20,8 +20,11 @@ POST         /classes                       controllers.ClassController.createCl
 PATCH        /:classId                      controllers.ClassController.updateClass(classId:Int)
 
 #GET           /:classid                                    controllers.ClassController.TODO
-POST         /:classId/registration         controllers.ClassRegistrationController.acceptRegister(classId:Int)
+POST         /:classId/registrations        controllers.ClassRegistrationController.acceptRegister(classId:Int)
 GET          /:classId/registrations        controllers.ClassRegistrationController.registeredList(classId:Int)
+POST         /:classId/registration         controllers.ClassRegistrationController.registerClass(classId:Int)
+#GET         /:classId/registration             controllers.ClassRegistrationController.registerClass(classId:Int)
+
 #
 #
 ##Pages in Class
@@ -44,7 +47,7 @@ POST         /:classId/timeline             controllers.TimelineController.postT
 ##item get/delete/update
 GET          /:classId/:itemId              controllers.TimelineController.getTimelineItem(classId: Int, itemId: Int)
 #DELETE        /:classId/:itemId                            controllers.Application.TODO
-#POST          /:classId/:itemId                            controllers.Application.TODO
+#PATCH          /:classId/:itemId                            controllers.Application.TODO
 #
 #
 ##Submission

@@ -6,4 +6,5 @@ package object exception {
   class InvalidDataIntegraityException(msessage:String) extends Exception(msessage)
   class DoesNotHavePermissionException(msessage:String) extends Exception(msessage)
   class NoSuchRowException(msessage:String) extends Exception(msessage)
+  class AlreadyRegistrated(msessage:String) extends Exception(msessage)
 }
