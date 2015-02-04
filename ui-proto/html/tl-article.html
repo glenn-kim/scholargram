@@ -1,11 +1,18 @@
 <article class="article" ng-controller="TimelineController as TimelineCtrl">
-	<!-- TODO timeline 글쓰기 textbox 및 버튼 등 만들 것 -->
-	<section class="article-item">
-		<textarea class="article-write-box"></textarea>
-		<nav class="article-nav">
-			<button class="btn btn-primary">Hohohoo</button>
-		</nav>
-	</section>
+
+	<section class="article-write">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>hoho</a></li>
+			<li><a>hehe</a></li>
+		</ul>
+		<section class="article-write-wrapper">
+			<textarea class="article-write-textarea" rows=2></textarea>
+			<nav class="article-write-nav">
+				<button class="btn btn-sm btn-primary">Submit</button>
+			</nav>
+		</section>
+	</section><!-- /.article-write -->
+	
 	<section class="article-item" ng-repeat="item in TimelineCtrl.items">
 		<header ng-switch="{{ item.type }}">
 			<h3 ng-switch-when="1" class="article-item-type label label-primary">Quiz</h3>
@@ -29,5 +36,6 @@
 		<nav class="article-comment">
 			<a>댓글 달기</a>
 		</nav>
-	</section>
+	</section><!-- /.article-item -->
+
 </article>
