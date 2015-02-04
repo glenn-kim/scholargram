@@ -81,7 +81,6 @@ body {
 }
 
 footer {
-	display: block;
 	position: absolute;
 	left: 0px;
 	bottom: 0px;
@@ -90,6 +89,7 @@ footer {
 	background-color: #e7e7e7;
 	border-top: 1px solid #ccc;
 	box-shadow: 0px 0px 5px #aaa;
+	z-index: 0;
 }
 
 .clear {
@@ -683,12 +683,10 @@ fieldset[disabled] .btn-link:focus {
 }
 
 .nav > li {
-	position: relative;
 	display: block;
 }
 
 .nav > li > a {
-	position: relative;
 	display: block;
 	padding: 10px 15px;
 }
@@ -705,7 +703,7 @@ fieldset[disabled] .btn-link:focus {
 }
 
 .nav-tabs > li {
-	float: left;
+	display: inline-block;
 	margin-bottom: -1px;
 }
 

@@ -57,7 +57,7 @@
 		var self = this;
 		
 		self.getTimelineData = function() {
-			$http.get("json/timeline").
+			$http.get("json/timeline.json").
 				success(function(data) {
 					self.items = data;
 				});

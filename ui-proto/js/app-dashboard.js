@@ -62,7 +62,7 @@
 		];
 		
 		self.getDashboardData = function() {
-			$http.get("json/classes").
+			$http.get("json/classes.json").
 				success(function(classes) {
 					for (var idx in classes) {
 						var klass = classes[idx];

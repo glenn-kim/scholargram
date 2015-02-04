@@ -107,6 +107,8 @@ and (min-width: 750px) and (max-width: 969px) {
 
 @media only screen
 and (max-width: 749px) {
-
+	.article {
+		padding: 0px;
+	}
 }/* /MEDIA QUERY */
 
