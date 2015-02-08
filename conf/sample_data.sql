@@ -1,3 +1,5 @@
+DELETE FROM "SubmissionAttachments";
+DELETE FROM "Submissions";
 DELETE FROM "AssignmentAttachments";
 DELETE FROM "LectureAttachments";
 DELETE FROM "Attachments";
@@ -110,9 +112,9 @@ INSERT INTO "Assignments" VALUES
   (8,'3주차 과제','가나다라마바사 이렇쿵 저렇쿵.','2015-1-6 12:30:30');
 
 INSERT INTO "Lectures" VALUES
-  (3, '1주차 과제.'),
-  (6, '3주차 과제.'),
-  (9, '4주차 과제.');
+  (3, '1주차 수업자료.'),
+  (6, '3주차 수업자료.'),
+  (9, '4주차 수업자료.');
   
 INSERT INTO "Attachments" VALUES 
   ('aaaaaaaaaaa',9,'~/abc','file1'),
@@ -123,7 +125,23 @@ INSERT INTO "Attachments" VALUES
   ('fffffffffff',9,'~/www','file6'),
   ('ggggggggggg',9,'~/www','file7'),
   ('hhhhhhhhhhh',9,'~/www','file8'),
-  ('iiiiiiiiiii',9,'~/www','file9');
+  ('iiiiiiiiiii',9,'~/www','file9'),
+  ('aaaaaaaaaaa',1,'~/abc','file1'),
+  ('bbbbbbbbbbb',1,'~/def','file2'),
+  ('ccccccccccc',1,'~/asd','file3'),
+  ('ddddddddddd',2,'~/qqq','file4'),
+  ('eeeeeeeeeee',2,'~/www','file5'),
+  ('fffffffffff',2,'~/www','file6'),
+  ('ggggggggggg',3,'~/www','file7'),
+  ('hhhhhhhhhhh',4,'~/www','file8'),
+  ('iiiiiiiiiii',4,'~/www','file9'),
+  ('reserved1',1,'~/www','file9'),
+  ('reserved2',1,'~/www','file9'),
+  ('reserved3',1,'~/www','file9'),
+  ('reserved4',1,'~/www','file9'),
+  ('reserved5',1,'~/www','file9'),
+  ('reserved6',1,'~/www','file9');
+  
   
 INSERT INTO "AssignmentAttachments" VALUES 
   ('aaaaaaaaaaa',9,2),
@@ -137,3 +155,25 @@ INSERT INTO "LectureAttachments" VALUES
   ('ggggggggggg',9,3),
   ('hhhhhhhhhhh',9,9),
   ('iiiiiiiiiii',9,9);
+
+INSERT INTO  "Submissions" VALUES 
+  (1,2,1,'제출입니다.','2015-1-1 13:52:32'),
+  (2,2,1,'제출입니다.22','2015-1-2 13:52:32'),
+  (3,2,1,'제출입니다.33','2015-1-3 13:52:32'),
+  (4,2,2,'제출입니다.44','2015-1-4 13:52:32'),
+  (5,2,2,'제출입니다.55','2015-1-5 13:52:32'),
+  (6,2,2,'제출입니다.66','2015-1-6 13:52:32'),
+  (7,2,3,'제출입니다.77','2015-1-7 13:52:32'),
+  (8,2,3,'제출입니다.88','2015-1-8 13:52:32'),
+  (9,2,4,'제출입니다.99','2015-1-9 13:52:32');
+
+INSERT INTO "SubmissionAttachments" VALUES
+  ('aaaaaaaaaaa',1,1),
+  ('bbbbbbbbbbb',1,2),
+  ('ccccccccccc',1,3),
+  ('ddddddddddd',2,4),
+  ('eeeeeeeeeee',2,4),
+  ('fffffffffff',2,4),
+  ('ggggggggggg',3,7),
+  ('hhhhhhhhhhh',4,9),
+  ('iiiiiiiiiii',4,9);

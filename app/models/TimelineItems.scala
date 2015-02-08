@@ -66,22 +66,20 @@ object TimelineItems {
       Lectureattachments.filter(_.itemid === lectureId).map(x=>(x.attachmentid,x.owner))
   }
   
-  private def checkTimelineReadPerm(classId:Int)(implicit session : Session, user:Users.User){
-    if (!(user match {
+  def checkTimelineReadPerm(classId:Int)(implicit session : Session, user:Users.User)=
+    user match {
         case Users.User(id, name, "student") =>
           ClassRegistrations.checkPerm(classId)
         case Users.User(id, name, "professor") =>
           Classes.checkPerm(classId)
-      })) throw new DoesNotHavePermissionException("cant not have permission to read this classes")
-    }
+      }
   
-  private def checkTimelineWritePerm(classId:Int)(implicit session : Session, user:Users.User){
-    if (!(user match {
-        case Users.User(id, name, "student") =>
-          false
-        case Users.User(id, name, "professor") =>
-          Classes.checkPerm(classId)
-      })) throw new DoesNotHavePermissionException("cant not have permission to read this classes")
+  def checkTimelineWritePerm(classId:Int)(implicit session : Session, user:Users.User)=
+    user match {
+      case Users.User(id, name, "student") =>
+        false
+      case Users.User(id, name, "professor") =>
+        Classes.checkPerm(classId)
     }
 
   private def dataobjectMapping(implicit session:Session):((queryResultType)=>TimelineItem) = { 
@@ -100,19 +98,19 @@ object TimelineItems {
                           .leftJoin(Lectures).on(_._1._1.itemid === _.itemid)
                           .map(x=>(x._1._1._1,x._1._1._2.?,x._1._2.?,x._2.?))
   def apply(classId:Int,drop:Int=0,take:Int=999999)(implicit session : Session, user:Users.User)={
-    checkTimelineReadPerm(classId)
+    if(!checkTimelineReadPerm(classId)) throw new DoesNotHavePermissionException("cant not have permission to read this classes")
     allTimeline.filter(_._1.classid === classId).drop(drop).take(take)
       .list.map(dataobjectMapping)
   }
 
   
   def apply(classId:Int, itemId:Int)(implicit session:Session, user:Users.User)={
-    checkTimelineReadPerm(classId)
+    if(!checkTimelineReadPerm(classId)) throw new DoesNotHavePermissionException("cant not have permission to read this classes")
     allTimeline.filter(_._1.classid === classId).filter(_._1.itemid === itemId).firstOption.map(dataobjectMapping)
   }
 
   def append(classId:Int,item:Any)(implicit session:Session, user:Users.User)={
-    checkTimelineWritePerm(classId)
+    if(!checkTimelineWritePerm(classId)) throw new DoesNotHavePermissionException("cant not have permission to read this classes")
 
     val itemid = (tQuery returning tQuery.map(_.itemid)) +=
       TimelineitemsRow(0,classId,1,new Timestamp(System.currentTimeMillis()))

@@ -46,7 +46,7 @@ object ClassRegistrations {
     row map (new ClassRegistration(user,_))
   }
 
-  private lazy val registeredStudents = (tQuery innerJoin ScholargramTables.Classes on (_.classid === _.classid)
+  val registeredStudents = (tQuery innerJoin ScholargramTables.Classes on (_.classid === _.classid)
                                                 innerJoin Users.userDetailQuery on (_._1.userid === _._1.userid))
   def apply(profId:Int, classId:Int)(implicit session : Session) =
     registeredStudents

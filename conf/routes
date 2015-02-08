@@ -50,10 +50,10 @@ GET          /:classId/:itemId              controllers.TimelineController.getTi
 #PATCH          /:classId/:itemId                            controllers.Application.TODO
 #
 #
-##Submission
-##submission managements
-#GET           /:classId/:assignmentId/submissions          controllers.Application.TODO
-#POST          /:classId/:assignmentId/submissions          controllers.Application.TODO
+#Submission
+#submission managements
+GET           /:classId/:assignmentId/submissions          controllers.SubmissionController.getSubmissions(classId:Int,assignmentId:Int)
+POST          /:classId/:assignmentId/submissions          controllers.SubmissionController.postSubmission(classId:Int,assignmentId:Int)
 #GET           /:classId/:assignmentId/:submissionId        controllers.Application.TODO
 #DELETE        /:classId/:assignmentId/:submissionId        controllers.Application.TODO
 #

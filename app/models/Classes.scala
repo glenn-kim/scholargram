@@ -94,6 +94,7 @@ object Classes {
         .getOrElse(throw new DoesNotHavePermissionException("does not have permission in this Class"))
   }
 
-  def checkPerm(classId:Int)(implicit session:Session, prof:User) = 
-    tQuery.filter(t=>t.classid === classId && t.professorid === prof.id).firstOption.isDefined
+  def checkPerm(classId:Int)(implicit session:Session, prof:User) =
+    if(prof.userType != "professor") false else
+      tQuery.filter(t=>t.classid === classId && t.professorid === prof.id).firstOption.isDefined
 }
