@@ -14,11 +14,17 @@
 	<!-- CSS -->
 	<link href="css/bootstrap-glyphicon.css" rel="stylesheet">
 	<link href="css/scholargram.css" rel="stylesheet">
-	<link href="css/sg-header.css" rel="stylesheet">
-	<link href="css/cmn-aside.css" rel="stylesheet">
+	<link href="css/sg-cmn-header.css" rel="stylesheet">
+	<link href="css/sg-cmn-article.css" rel="stylesheet">
+	<link href="css/sg-dashboard.css" rel="stylesheet">
+	<link href="css/sg-timeline.css" rel="stylesheet">
 	
 	<!-- AngularJS -->
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+	
+	<!-- JS Libraries -->
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="js/lib/jquery.autosize.js"></script>
 </head>
 
 <body ng-controller="MainController">
@@ -29,38 +35,29 @@
 	-->
 	<sg-header></sg-header>
 	
-	<section class="container table table-horizontal" ng-switch="$location.path()">
-		{{ currentUser }}
+	<section class="container" ng-switch="$location.path()">
 		<sg-resigter ng-hide="currentUser">
-			<!--
-				NOT YET CREATED
-			-->
 			<h2>RESIGTER VIEW</h2>
 		</sg-resigter>
 		
 		<section ng-show="currentUser">
-			<sg-article-dashboard ng-switch-when="/">
-				<!--
-					CTRL: DashboardController
-						$rootScope.$watch("currentUser")
-						__getClasses()
-				-->
-			</sg-article-dashboard>
-		
-			<sg-article-timeline ng-switch-default>
-				<!--
-					CTRL: TimelineController
-						$rootScope.$watch("currentUser")
-						__getTimelineItems()
-				-->
-			</sg-article-timeline>
+			<section class="dashboard table table-horizontal" ng-switch-when="/">
+				<sg-dashboard-aside></sg-dashboard-aside>
+				<sg-dashboard-article></sg-dashboard-article>
+			</section>
+			<section class="timeline table table-horizontal" ng-switch-default>
+				<sg-timeline-aside></sg-timeline-aside>
+				<sg-timeline-article></sg-timeline-article>
+			</section>
 		</section>
+		<footer></footer>
 	</section>
 	
 	<script src="js/app-scholargram.js"></script>
 	<script src="js/sg-user.js"></script>
 	<script src="js/sg-header.js"></script>
-	<script src="js/sg-article.js"></script>
+	<script src="js/sg-dashboard.js"></script>
+	<script src="js/sg-timeline.js"></script>
 </body>
 
 </html>

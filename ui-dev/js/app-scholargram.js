@@ -1,9 +1,10 @@
 (function() {
-	var app = angular.module("scholargram", ["sgHeader", "sgArticle"]);
+	var app = angular.module("scholargram", ["sgHeader", "sgDashboard", "sgTimeline"]);
 	
 	app.config(["$locationProvider", function($locationProvider) {
 		//$locationProvider.html5Mode(true);		
 	}]);
+	
 	
 	// CONTROLLERS
 	app.controller("MainController", ["$rootScope", "$http", "$location", "getMe",

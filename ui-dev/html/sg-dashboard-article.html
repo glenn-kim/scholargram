@@ -1,5 +1,8 @@
-<section>
-	<a  ng-repeat="class in classes" href="#/{{ class.id }}">
+<article>
+	<header class="page-header">
+		<h2>My Classes</h2>
+	</header>
+	<a ng-repeat="class in classes" href="#/{{class.id}}">
 		<section class="class-section">
 			<h3>{{ class.name }}</h3>
 			by {{ class.professor.name }}<br>
@@ -7,4 +10,4 @@
 			{{ class.started_date | date: "MMM, yyyy" }} - {{ class.ending_date | date: "MMM, yyyy" }}<br>
 		</section>
 	</a>
-</section>
+</article>

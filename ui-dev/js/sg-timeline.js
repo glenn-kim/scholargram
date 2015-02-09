@@ -8,20 +8,28 @@
 	
 	
 	// DIRECTIVES
-	timeline.directive("sgTimeline", function() {
+	timeline.directive("sgTimelineAside", function() {
 		return {
 			restrict: "E",
-			templateUrl: "html/sg-timeline.html",
-			controller: "TimelineController",
-			scope: true,
+			templateUrl: "html/sg-timeline-aside.html",
 			replace: true
 		};
-	})
+	});
+	
+	timeline.directive("sgTimelineArticle", function() {
+		return {
+			restrict: "E",
+			templateUrl: "html/sg-timeline-article.html",
+			controller: "TimelineController",
+			scope: true,
+			replace: true,
+		};
+	});
 	
 	
 	// CONTROLLERS
-	timeline.controller("TimelineController", ["$rootScope", "$scope", "$http", "$location",
-	function($rootScope, $scope, $http, $location) {
+	timeline.controller("TimelineController", ["$rootScope", "$scope", "$http", "$location", "$log",
+	function($rootScope, $scope, $http, $location, $log) {
 		var __classId = $location.path();
 		var __url = _apiRoot + __classId + "/timeline";
 
@@ -34,6 +42,12 @@
 					$rootScope.$location.path("/");
 				});
 		};
+		
+				
+		$http.get(_apiRoot + __classId + "/registrations").
+			success(function(data) {
+				console.log(data);
+			});
 
 		var __regExp = new RegExp("/[0-9]+");
 		$rootScope.$watch("currentUser", function(newUser) {
@@ -43,5 +57,8 @@
 				}
 			}
 		});
+
+		// autosize on textarea
+		$("textarea").autosize();
 	}]);
 })();

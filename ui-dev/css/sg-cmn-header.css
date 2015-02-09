@@ -39,6 +39,7 @@
 	display: table-cell;
 	vertical-align: middle;
 	color: rgb(80, 80, 80);
+	text-decoration: none;
 }
 
 .header > .container a:hover{

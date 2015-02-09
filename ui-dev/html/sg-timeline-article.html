@@ -1,0 +1,61 @@
+<article class="article">
+
+	<section class="article-write">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>공지</a></li>
+			<li><a>강의자료</a></li>
+			<li><a>과제안내</a></li>
+		</ul>
+		<section class="article-write-wrapper">
+			<textarea class="article-write-textarea" rows=2></textarea>
+			<nav class="article-write-nav">
+				<button class="btn btn-sm btn-primary">Submit</button>
+			</nav>
+		</section>
+	</section><!-- /.article-write -->
+	
+	<section class="article-item" ng-repeat="item in timelineItems | orderBy: '-id'" ng-switch="item.type">
+		<section ng-switch-when="alert">
+			<header>
+				<h3 class="article-item-type label label-primary">공지</h3>
+				<div class="article-item-datetime">{{ item.publish | date: "yyyy-MMM-dd hh:mm"}}</div>
+			</header>
+			<section class="article-item-contents">
+				{{ item.data.text }}
+			</section>
+		</section>
+		
+		<section ng-switch-when="assignment">
+			<header>
+				<h3 class="article-item-type label label-success">과제안내</h3>
+				<div class="article-item-datetime">{{ item.publish | date: "yyyy-MMM-dd hh:mm"}}</div>
+			</header>
+			<section class="article-item-contents">
+				{{ item.data.title }}<br>
+				{{ item.data.text }}
+				<div ng-repeat="attachment in item.data.attachments">
+					<a href="{{ attachment.url }}">{{ attachment.filename }}</a>, {{ attachment.size }} KB
+				</div>
+			</section>
+		</section>
+		
+		<section ng-switch-when="lecture">
+			<header>
+				<h3 class="article-item-type label label-warning">강의자료</h3>
+				<div class="article-item-datetime">{{ item.publish | date: "yyyy-MMM-dd hh:mm"}}</div>
+			</header>
+			<section class="article-item-contents">
+				{{ item.data.title }}
+				<div ng-repeat="attachment in item.data.attachments">
+					<a href="{{ attachment.url }}">{{ attachment.filename }}</a>, {{ attachment.size }} KB
+				</div>
+			</section>
+		</section>
+		
+		<nav class="article-comment">
+			<a>댓글 달기</a>
+		</nav>
+	</section><!-- /.article-item -->
+
+</article>
+

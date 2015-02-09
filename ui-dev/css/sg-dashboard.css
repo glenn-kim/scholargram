@@ -1,0 +1,39 @@
+.dashboard {
+	width: 100%;
+}
+
+.aside {
+	display: table-cell;
+	vertical-align: top;
+	z-index: 100;
+}
+
+.aside {
+	width: 200px;
+	padding-right: 30px;
+}
+
+.aside .profile {
+	width: 170px;
+	padding-bottom: 10px;
+}
+
+.aside .profile img {
+	width: 100%;
+	height: auto;
+}
+
+.profile-text {
+	text-align: center;
+	padding: 10px 0px;
+}
+
+.aside nav {
+	width: 170px;
+	text-align: center;
+}
+
+.aside nav > .btn {
+	width: 150px;
+	margin-bottom: 5px;
+}
