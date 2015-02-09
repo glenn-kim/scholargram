@@ -19,7 +19,7 @@ GET          /classes                       controllers.ClassController.classLis
 POST         /classes                       controllers.ClassController.createClass
 PATCH        /:classId                      controllers.ClassController.updateClass(classId:Int)
 
-#GET           /:classid                                    controllers.ClassController.TODO
+GET           /:classid                     controllers.ClassController.getClassOne(classid:Int)
 POST         /:classId/registrations        controllers.ClassRegistrationController.acceptRegister(classId:Int)
 GET          /:classId/registrations        controllers.ClassRegistrationController.registeredList(classId:Int)
 POST         /:classId/registration         controllers.ClassRegistrationController.registerClass(classId:Int)

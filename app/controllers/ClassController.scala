@@ -28,6 +28,17 @@ object ClassController extends Controller{
       .getOrElse(UserLogin.loginNessesery)
   }
   
+  def getClassOne(classId:Int) =  DBAction{req=>
+    UserLogin.loginedMe(req)
+      .map{
+        Classes.getClassOne(classId)(req.dbSession,_)
+          .map(Json.toJson(_))
+          .map(Ok(_))
+          .getOrElse(forbidden)
+      }
+      .getOrElse(UserLogin.loginNessesery)
+  }
+  
   case class CreateForm(className:String, startDate:Option[Date], endDate:Option[Date], schoolId:Int)
   implicit val createFormReads:Reads[CreateForm] =
     ((JsPath \ "class_name").read[String] and (JsPath \ "start_date").readNullable[Date]

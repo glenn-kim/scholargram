@@ -66,6 +66,24 @@ object Classes {
       throw new InvalidDataIntegraityException("user must be student or professor");
   }
 
+  def getClassOne(classId:Int)(implicit session : Session,user:User) = user match {
+    case User(id,name,"student")=>
+      studentClassJoin
+        .filter(_._1.userid === id)
+        .filter(_._2.classid === classId)
+        .firstOption
+        .map(row=>new Class(row._2,row._3,row._4))
+
+    case User(id,name,"professor")=>
+      classJoin
+        .filter(_._1.professorid === id)
+        .filter(_._1.classid === classId)
+        .firstOption
+        .map(row=>new Class(row._1,row._2,row._3))
+    case _=>
+      throw new InvalidDataIntegraityException("user must be student or professor");
+  }
+
   def create(form:ClassController.CreateForm)(implicit session : Session, user:User) = user match {
     case User(id, name, "student") =>
       throw new DoesNotHavePermissionException("students can't request it.")
