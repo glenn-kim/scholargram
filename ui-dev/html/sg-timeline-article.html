@@ -1,15 +1,37 @@
 <article class="article">
-
-	<section class="article-write">
+	
+	<section class="article-write" ng-show="currentUser.user_type == 'professor'" ng-switch="prof.activeTab">
 		<ul class="nav nav-tabs">
-			<li class="active"><a>공지</a></li>
-			<li><a>강의자료</a></li>
-			<li><a>과제안내</a></li>
+			<li ng-class="{ active : prof.isSelected('alert') }">
+				<a ng-click="prof.activate('alert')">공지</a>
+			</li>
+			<li ng-class="{ active : prof.isSelected('lecture') }">
+				<a ng-click="prof.activate('lecture')">강의자료</a>
+			</li>
+			<li ng-class="{ active : prof.isSelected('assignment') }">
+				<a ng-click="prof.activate('assignment')">과제안내</a>
+			</li>
 		</ul>
-		<section class="article-write-wrapper">
-			<textarea class="article-write-textarea" rows=2></textarea>
+		<section class="article-write-wrapper" ng-switch-when="alert">
+			<textarea class="article-write-textarea" rows=2 ng-model="text"></textarea>
 			<nav class="article-write-nav">
-				<button class="btn btn-sm btn-primary">Submit</button>
+				<button class="btn btn-sm btn-primary" ng-click="writeAlert(text)">Submit</button>
+			</nav>
+		</section>
+		
+		<section class="article-write-wrapper" ng-switch-when="lecture">
+			title: <input type="text" ng-model="title">
+			<nav class="article-write-nav">
+				<button class="btn btn-sm btn-primary" ng-click="writeLecture(title)">Submit</button>
+			</nav>
+		</section>
+		
+		<section class="article-write-wrapper" ng-switch-when="assignment">
+			title: <input type="text" ng-model="title">
+			<textarea class="article-write-textarea" rows=2 ng-model="description"></textarea>
+			due date: <input type="text" ng-model="dueDate">
+			<nav class="article-write-nav">
+				<button class="btn btn-sm btn-primary" ng-click="writeAssignment(title, description, dueDate)">Submit</button>
 			</nav>
 		</section>
 	</section><!-- /.article-write -->
@@ -32,7 +54,8 @@
 			</header>
 			<section class="article-item-contents">
 				{{ item.data.title }}<br>
-				{{ item.data.text }}
+				{{ item.data.text }}<br>
+				마감: {{ item.data.due_datetime | date: "yyyy-MMM-dd hh:mm" }}
 				<div ng-repeat="attachment in item.data.attachments">
 					<a href="{{ attachment.url }}">{{ attachment.filename }}</a>, {{ attachment.size }} KB
 				</div>
