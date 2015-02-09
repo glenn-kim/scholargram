@@ -1,0 +1,47 @@
+<header class="header header-fixed-top" ng-controller="UserController">
+	<section class="container">
+		<section class="header-left">
+			<a class="header-brand" href="./#/">Scholargram</a>
+		</section><!-- /.header-left -->
+		
+		<section class="header-center" ng-show="currentUser">
+			<form class="header-form">
+				<div class="input-group">
+					<div class="input-group-text">
+						<input type="text" placeholder="Search">
+					</div>
+					<div class="input-group-button">
+						<button class="btn btn-primary" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</section><!-- /.header-center -->
+		
+		<section class="header-right" ng-hide="currentUser">
+			<form class="header-form">
+				<section class="input-group">
+					<div class="input-group-text" ng-hide="currentUser">
+						<input ng-model="email" type="text" placeholder="E-mail">
+					</div>
+					<div class="input-group-text" ng-hide="currentUser">
+						<input ng-model="password" type="password" placeholder="Password">
+					</div>
+					<div class="input-group-button">
+						<button class="btn btn-primary" ng-click="login(email, password)">login</button>
+					</div>
+				</section>
+			</form>
+		</section><!-- /.header-right -->
+		
+		<section class="header-right" ng-show="currentUser">
+			<div class="table table-horizontal">
+				<a class="header-link"><span class="glyphicon glyphicon-bell"></span></a>
+				<a class="header-link" ng-click="logout()">
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
+				</a>
+			</div>
+		</section><!-- /.header-right -->
+	</section>
+</header>
