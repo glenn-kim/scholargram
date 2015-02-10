@@ -43,6 +43,7 @@
 				});
 		};
 		
+/*
 		// TEST
 		// 학생으로 로그인 되어있을 시 FORBIDDEN
 		$http.get(_apiRoot + __classId + "/registrations").
@@ -68,6 +69,7 @@
 				console.log(data);
 			});
 		// /TEST
+*/
 		
 		var __regExp = new RegExp("/[0-9]+");
 		$rootScope.$watch("currentUser", function(newUser) {
