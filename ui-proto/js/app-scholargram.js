@@ -2,13 +2,6 @@
 	var app = angular.module("appScholargram", []);
 	
 	
-	// Private Variables
-	var _oUser = {
-		name: "TEST"
-	};
-	var _sRootDir = "/~min/scholargram/";
-	
-	
 	// Directive Mapping
 	app.directive("sgHeader", function() {
 		/*
@@ -18,34 +11,36 @@
 				Even a single comment wasn't allowed!
 			2) scope: true
 				This option makes a new local scope for this directive.
-				If not true, directive share parent scope.
+				If not true, directive share parent's $scope.
 		*/	
 		return {
 			restrict: "E",
-			templateUrl: "./include/sg-header.html",
-			controller: function($scope) {
-				$scope.rootDir = _sRootDir;
-			},
-			scope: true,
+			templateUrl: "include/sg-header.html",
 			replace: true
 		}
 	});// D/commonHeader
 	
 	
 	// Controller Declaration
-	app.controller("UserController", ["$scope", function($scope) {
+	app.controller("UserController", ["$http", "$log", function($http, $log) {
 		/*
 			NOTE!
 			1) $scope !== this
 			2) "this" keyword will help maintaining controllers' role clearly.
 		*/
-		this.getUser = function() {
-			return _oUser;
+		
+		var self = this;
+
+		// public
+		self.authenticate = function(email, passwd) {
+			$http.get("json/user.json").
+				success(function(oUser) {
+					self.user = oUser;
+				});
 		};
 		
-		this.setUser = function(oUser) {
-			_oUser = oUser;
-		};
+		// init
+		self.authenticate("min20@nhnnext.org", "1234");
 	}]);// C/commonUserCtrl
 	
 })();
