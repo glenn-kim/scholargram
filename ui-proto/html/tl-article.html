@@ -1,0 +1,41 @@
+<article class="article" ng-controller="TimelineController as TimelineCtrl">
+
+	<section class="article-write">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>hoho</a></li>
+			<li><a>hehe</a></li>
+		</ul>
+		<section class="article-write-wrapper">
+			<textarea class="article-write-textarea" rows=2></textarea>
+			<nav class="article-write-nav">
+				<button class="btn btn-sm btn-primary">Submit</button>
+			</nav>
+		</section>
+	</section><!-- /.article-write -->
+	
+	<section class="article-item" ng-repeat="item in TimelineCtrl.items">
+		<header ng-switch="{{ item.type }}">
+			<h3 ng-switch-when="1" class="article-item-type label label-primary">Quiz</h3>
+			<h3 ng-switch-when="2" class="article-item-type label label-success">질문</h3>
+			<h3 ng-switch-when="3" class="article-item-type label label-warning">강의자료</h3>
+			<h3 ng-switch-when="4" class="article-item-type label label-danger">과제제출</h3>
+			<h3 ng-switch-default class="article-item-type label label-default">기타</h3>
+		</header>
+		<section class="article-item-info table table-horizontal">
+			<div class="article-item-author-img">
+				<img src="images/no-profile.jpg">
+			</div>
+			<div class="article-item-info-text">
+				<div class="article-item-author">{{ item.author }}</div>
+				<div class="article-item-datetime">{{ item.publishDatetime }}</div>
+			</div>
+		</section>
+		<section class="article-item-contents">
+			{{ item.contents }}
+		</section>
+		<nav class="article-comment">
+			<a>댓글 달기</a>
+		</nav>
+	</section><!-- /.article-item -->
+
+</article>
