@@ -13,6 +13,7 @@ case class School(id:Int, name:String, location:Option[String]){
 }
 case class Major(id:Int, name:String, school:School){
   def this(id:Int, name:String, school:SchoolsRow)=this(id,name,new School(school))
+  def this(major:MajorsRow, school:SchoolsRow)=this(major.majorid,major.majorname,new School(school))
 }
 
 object School{
@@ -23,7 +24,6 @@ object School{
       "location"->o.location
     )
   }
-  
 }
 object Major{
   implicit val MajorWrites = new Writes[Major] {

@@ -1,7 +1,7 @@
 package models
 
 import models.ScholargramTables._
-import play.api.db.slick.Config.driver.profile.simple._
+import models.ScholargramTables.profile.simple._
 import play.api.libs.json._
 
 import scala.slick.lifted.{Column, Query}
